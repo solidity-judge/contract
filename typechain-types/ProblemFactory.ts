@@ -36,6 +36,7 @@ export interface ProblemFactoryInterface extends utils.Interface {
     "proxiableUUID()": FunctionFragment;
     "simpleChecker()": FunctionFragment;
     "transferOwnership(address,bool,bool)": FunctionFragment;
+    "upgradeBeacon(address)": FunctionFragment;
     "upgradeTo(address)": FunctionFragment;
     "upgradeToAndCall(address,bytes)": FunctionFragment;
   };
@@ -77,6 +78,10 @@ export interface ProblemFactoryInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string, boolean, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "upgradeBeacon",
+    values: [string]
   ): string;
   encodeFunctionData(functionFragment: "upgradeTo", values: [string]): string;
   encodeFunctionData(
@@ -120,6 +125,10 @@ export interface ProblemFactoryInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "upgradeBeacon",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "upgradeTo", data: BytesLike): Result;
@@ -242,6 +251,11 @@ export interface ProblemFactory extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    upgradeBeacon(
+      newImplementation: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     upgradeTo(
       newImplementation: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -289,6 +303,11 @@ export interface ProblemFactory extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  upgradeBeacon(
+    newImplementation: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   upgradeTo(
     newImplementation: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -331,6 +350,11 @@ export interface ProblemFactory extends BaseContract {
       newOwner: string,
       direct: boolean,
       renounce: boolean,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    upgradeBeacon(
+      newImplementation: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -426,6 +450,11 @@ export interface ProblemFactory extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    upgradeBeacon(
+      newImplementation: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     upgradeTo(
       newImplementation: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -471,6 +500,11 @@ export interface ProblemFactory extends BaseContract {
       newOwner: string,
       direct: boolean,
       renounce: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    upgradeBeacon(
+      newImplementation: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -46,6 +46,7 @@ export interface ProblemInterface extends utils.Interface {
     "getContestantInfo(address)": FunctionFragment;
     "id()": FunctionFragment;
     "initialize(uint256,address,address,address)": FunctionFragment;
+    "modifyChecker(address)": FunctionFragment;
     "replaceTests((bytes,bytes32,uint224)[])": FunctionFragment;
     "runSolution(address)": FunctionFragment;
     "testLength()": FunctionFragment;
@@ -78,6 +79,10 @@ export interface ProblemInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "initialize",
     values: [BigNumberish, string, string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "modifyChecker",
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "replaceTests",
@@ -123,6 +128,10 @@ export interface ProblemInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "id", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "modifyChecker",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "replaceTests",
     data: BytesLike
@@ -262,6 +271,11 @@ export interface Problem extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    modifyChecker(
+      newChecker: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     replaceTests(
       newTests: TestCaseStruct[],
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -343,6 +357,11 @@ export interface Problem extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  modifyChecker(
+    newChecker: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   replaceTests(
     newTests: TestCaseStruct[],
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -420,6 +439,8 @@ export interface Problem extends BaseContract {
       _gateFactory: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    modifyChecker(newChecker: string, overrides?: CallOverrides): Promise<void>;
 
     replaceTests(
       newTests: TestCaseStruct[],
@@ -515,6 +536,11 @@ export interface Problem extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    modifyChecker(
+      newChecker: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     replaceTests(
       newTests: TestCaseStruct[],
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -573,6 +599,11 @@ export interface Problem extends BaseContract {
       _author: string,
       _checker: string,
       _gateFactory: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    modifyChecker(
+      newChecker: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

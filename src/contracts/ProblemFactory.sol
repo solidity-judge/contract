@@ -26,9 +26,10 @@ contract ProblemFactory is
         simpleChecker = address(new SimpleChecker());
     }
 
-    function createProblem(
-        address checker
-    ) external returns (uint256 id, address problem) {
+    function createProblem(address checker)
+        external
+        returns (uint256 id, address problem)
+    {
         if (checker == address(0)) checker = simpleChecker;
 
         id = ++problemCount;
@@ -46,6 +47,10 @@ contract ProblemFactory is
     function initialize(address _implementation) external initializer {
         __BoringOwnable_init();
         implementation = _implementation;
+    }
+
+    function upgradeBeacon(address newImplementation) external onlyOwner {
+        implementation = newImplementation;
     }
 
     // ----------------- upgrade-related -----------------
