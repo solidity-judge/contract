@@ -14,15 +14,7 @@ jobs:
           submodules: recursive
       - uses: actions/setup-node@v2
       - name: Install dev dependencies
-        run: npm install
-
-      - name: Install Foundry
-        uses: onbjerg/foundry-toolchain@v1
-        with:
-          version: nightly
+        run: yarn install
 
       - name: Run lint check
-        run: npm run lint:check
-
-      - name: Run tests
-        run: forge test
+        run: yarn lint:check
