@@ -26,10 +26,9 @@ contract ProblemFactory is
         simpleChecker = address(new SimpleChecker());
     }
 
-    function createProblem(address checker)
-        external
-        returns (uint256 id, address problem)
-    {
+    function createProblem(
+        address checker
+    ) external returns (uint256 id, address problem) {
         if (checker == address(0)) checker = simpleChecker;
 
         id = ++problemCount;

@@ -10,7 +10,8 @@ interface IGate {
 
     function deploy(bytes memory bytecode) external returns (address solution);
 
-    function deployAndRun(bytes memory bytecode, bytes memory input)
-        external
-        returns (bytes memory output);
+    function deployAndRun(
+        bytes memory bytecode,
+        bytes memory input
+    ) external returns (bytes memory output);
 }

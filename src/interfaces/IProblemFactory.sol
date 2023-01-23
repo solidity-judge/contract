@@ -9,7 +9,7 @@ interface IProblemFactory {
         address checker
     );
 
-    function createProblem(address checker)
-        external
-        returns (uint256 id, address problem);
+    function createProblem(
+        address checker
+    ) external returns (uint256 id, address problem);
 }

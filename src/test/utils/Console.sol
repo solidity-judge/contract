@@ -305,211 +305,127 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        uint256 p1,
-        uint256 p2
-    ) internal view {
+    function log(uint256 p0, uint256 p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,uint,uint)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        uint256 p1,
-        string memory p2
-    ) internal view {
+    function log(uint256 p0, uint256 p1, string memory p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,uint,string)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        uint256 p1,
-        bool p2
-    ) internal view {
+    function log(uint256 p0, uint256 p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,uint,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        uint256 p1,
-        address p2
-    ) internal view {
+    function log(uint256 p0, uint256 p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,uint,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        string memory p1,
-        uint256 p2
-    ) internal view {
+    function log(uint256 p0, string memory p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,string,uint)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        string memory p1,
-        string memory p2
-    ) internal view {
+    function log(uint256 p0, string memory p1, string memory p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,string,string)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        string memory p1,
-        bool p2
-    ) internal view {
+    function log(uint256 p0, string memory p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,string,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        string memory p1,
-        address p2
-    ) internal view {
+    function log(uint256 p0, string memory p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,string,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        bool p1,
-        uint256 p2
-    ) internal view {
+    function log(uint256 p0, bool p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,bool,uint)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        bool p1,
-        string memory p2
-    ) internal view {
+    function log(uint256 p0, bool p1, string memory p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,bool,string)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        bool p1,
-        bool p2
-    ) internal view {
+    function log(uint256 p0, bool p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,bool,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        bool p1,
-        address p2
-    ) internal view {
+    function log(uint256 p0, bool p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,bool,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        address p1,
-        uint256 p2
-    ) internal view {
+    function log(uint256 p0, address p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,address,uint)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        address p1,
-        string memory p2
-    ) internal view {
+    function log(uint256 p0, address p1, string memory p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,address,string)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        address p1,
-        bool p2
-    ) internal view {
+    function log(uint256 p0, address p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,address,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        address p1,
-        address p2
-    ) internal view {
+    function log(uint256 p0, address p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,address,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        string memory p0,
-        uint256 p1,
-        uint256 p2
-    ) internal view {
+    function log(string memory p0, uint256 p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(string,uint,uint)", p0, p1, p2)
         );
     }
 
-    function log(
-        string memory p0,
-        uint256 p1,
-        string memory p2
-    ) internal view {
+    function log(string memory p0, uint256 p1, string memory p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(string,uint,string)", p0, p1, p2)
         );
     }
 
-    function log(
-        string memory p0,
-        uint256 p1,
-        bool p2
-    ) internal view {
+    function log(string memory p0, uint256 p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(string,uint,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        string memory p0,
-        uint256 p1,
-        address p2
-    ) internal view {
+    function log(string memory p0, uint256 p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(string,uint,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        string memory p0,
-        string memory p1,
-        uint256 p2
-    ) internal view {
+    function log(string memory p0, string memory p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(string,string,uint)", p0, p1, p2)
         );
@@ -525,432 +441,259 @@ library console {
         );
     }
 
-    function log(
-        string memory p0,
-        string memory p1,
-        bool p2
-    ) internal view {
+    function log(string memory p0, string memory p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(string,string,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        string memory p0,
-        string memory p1,
-        address p2
-    ) internal view {
+    function log(string memory p0, string memory p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(string,string,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        string memory p0,
-        bool p1,
-        uint256 p2
-    ) internal view {
+    function log(string memory p0, bool p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(string,bool,uint)", p0, p1, p2)
         );
     }
 
-    function log(
-        string memory p0,
-        bool p1,
-        string memory p2
-    ) internal view {
+    function log(string memory p0, bool p1, string memory p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(string,bool,string)", p0, p1, p2)
         );
     }
 
-    function log(
-        string memory p0,
-        bool p1,
-        bool p2
-    ) internal view {
+    function log(string memory p0, bool p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(string,bool,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        string memory p0,
-        bool p1,
-        address p2
-    ) internal view {
+    function log(string memory p0, bool p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(string,bool,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        string memory p0,
-        address p1,
-        uint256 p2
-    ) internal view {
+    function log(string memory p0, address p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(string,address,uint)", p0, p1, p2)
         );
     }
 
-    function log(
-        string memory p0,
-        address p1,
-        string memory p2
-    ) internal view {
+    function log(string memory p0, address p1, string memory p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(string,address,string)", p0, p1, p2)
         );
     }
 
-    function log(
-        string memory p0,
-        address p1,
-        bool p2
-    ) internal view {
+    function log(string memory p0, address p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(string,address,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        string memory p0,
-        address p1,
-        address p2
-    ) internal view {
+    function log(string memory p0, address p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(string,address,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        uint256 p1,
-        uint256 p2
-    ) internal view {
+    function log(bool p0, uint256 p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,uint,uint)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        uint256 p1,
-        string memory p2
-    ) internal view {
+    function log(bool p0, uint256 p1, string memory p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,uint,string)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        uint256 p1,
-        bool p2
-    ) internal view {
+    function log(bool p0, uint256 p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,uint,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        uint256 p1,
-        address p2
-    ) internal view {
+    function log(bool p0, uint256 p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,uint,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        string memory p1,
-        uint256 p2
-    ) internal view {
+    function log(bool p0, string memory p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,string,uint)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        string memory p1,
-        string memory p2
-    ) internal view {
+    function log(bool p0, string memory p1, string memory p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,string,string)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        string memory p1,
-        bool p2
-    ) internal view {
+    function log(bool p0, string memory p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,string,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        string memory p1,
-        address p2
-    ) internal view {
+    function log(bool p0, string memory p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,string,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        uint256 p2
-    ) internal view {
+    function log(bool p0, bool p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,bool,uint)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        string memory p2
-    ) internal view {
+    function log(bool p0, bool p1, string memory p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,bool,string)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        bool p2
-    ) internal view {
+    function log(bool p0, bool p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,bool,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        address p2
-    ) internal view {
+    function log(bool p0, bool p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,bool,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        address p1,
-        uint256 p2
-    ) internal view {
+    function log(bool p0, address p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,address,uint)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        address p1,
-        string memory p2
-    ) internal view {
+    function log(bool p0, address p1, string memory p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,address,string)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        address p1,
-        bool p2
-    ) internal view {
+    function log(bool p0, address p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,address,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        bool p0,
-        address p1,
-        address p2
-    ) internal view {
+    function log(bool p0, address p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,address,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        uint256 p1,
-        uint256 p2
-    ) internal view {
+    function log(address p0, uint256 p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,uint,uint)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        uint256 p1,
-        string memory p2
-    ) internal view {
+    function log(address p0, uint256 p1, string memory p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,uint,string)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        uint256 p1,
-        bool p2
-    ) internal view {
+    function log(address p0, uint256 p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,uint,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        uint256 p1,
-        address p2
-    ) internal view {
+    function log(address p0, uint256 p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,uint,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        string memory p1,
-        uint256 p2
-    ) internal view {
+    function log(address p0, string memory p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,string,uint)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        string memory p1,
-        string memory p2
-    ) internal view {
+    function log(address p0, string memory p1, string memory p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,string,string)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        string memory p1,
-        bool p2
-    ) internal view {
+    function log(address p0, string memory p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,string,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        string memory p1,
-        address p2
-    ) internal view {
+    function log(address p0, string memory p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,string,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        bool p1,
-        uint256 p2
-    ) internal view {
+    function log(address p0, bool p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,bool,uint)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        bool p1,
-        string memory p2
-    ) internal view {
+    function log(address p0, bool p1, string memory p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,bool,string)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        bool p1,
-        bool p2
-    ) internal view {
+    function log(address p0, bool p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,bool,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        bool p1,
-        address p2
-    ) internal view {
+    function log(address p0, bool p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,bool,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        address p1,
-        uint256 p2
-    ) internal view {
+    function log(address p0, address p1, uint256 p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,address,uint)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        address p1,
-        string memory p2
-    ) internal view {
+    function log(address p0, address p1, string memory p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,address,string)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        address p1,
-        bool p2
-    ) internal view {
+    function log(address p0, address p1, bool p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,address,bool)", p0, p1, p2)
         );
     }
 
-    function log(
-        address p0,
-        address p1,
-        address p2
-    ) internal view {
+    function log(address p0, address p1, address p2) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(address,address,address)", p0, p1, p2)
         );
     }
 
-    function log(
-        uint256 p0,
-        uint256 p1,
-        uint256 p2,
-        uint256 p3
-    ) internal view {
+    function log(uint256 p0, uint256 p1, uint256 p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,uint,uint,uint)", p0, p1, p2, p3)
         );
@@ -973,23 +716,13 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        uint256 p1,
-        uint256 p2,
-        bool p3
-    ) internal view {
+    function log(uint256 p0, uint256 p1, uint256 p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,uint,uint,bool)", p0, p1, p2, p3)
         );
     }
 
-    function log(
-        uint256 p0,
-        uint256 p1,
-        uint256 p2,
-        address p3
-    ) internal view {
+    function log(uint256 p0, uint256 p1, uint256 p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,uint,uint,address)",
@@ -1069,12 +802,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        uint256 p1,
-        bool p2,
-        uint256 p3
-    ) internal view {
+    function log(uint256 p0, uint256 p1, bool p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,uint,bool,uint)", p0, p1, p2, p3)
         );
@@ -1097,23 +825,13 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        uint256 p1,
-        bool p2,
-        bool p3
-    ) internal view {
+    function log(uint256 p0, uint256 p1, bool p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,uint,bool,bool)", p0, p1, p2, p3)
         );
     }
 
-    function log(
-        uint256 p0,
-        uint256 p1,
-        bool p2,
-        address p3
-    ) internal view {
+    function log(uint256 p0, uint256 p1, bool p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,uint,bool,address)",
@@ -1125,12 +843,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        uint256 p1,
-        address p2,
-        uint256 p3
-    ) internal view {
+    function log(uint256 p0, uint256 p1, address p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,uint,address,uint)",
@@ -1159,12 +872,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        uint256 p1,
-        address p2,
-        bool p3
-    ) internal view {
+    function log(uint256 p0, uint256 p1, address p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,uint,address,bool)",
@@ -1176,12 +884,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        uint256 p1,
-        address p2,
-        address p3
-    ) internal view {
+    function log(uint256 p0, uint256 p1, address p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,uint,address,address)",
@@ -1363,12 +1066,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        string memory p1,
-        bool p2,
-        bool p3
-    ) internal view {
+    function log(uint256 p0, string memory p1, bool p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,string,bool,bool)",
@@ -1465,12 +1163,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        bool p1,
-        uint256 p2,
-        uint256 p3
-    ) internal view {
+    function log(uint256 p0, bool p1, uint256 p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,bool,uint,uint)", p0, p1, p2, p3)
         );
@@ -1493,23 +1186,13 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        bool p1,
-        uint256 p2,
-        bool p3
-    ) internal view {
+    function log(uint256 p0, bool p1, uint256 p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,bool,uint,bool)", p0, p1, p2, p3)
         );
     }
 
-    function log(
-        uint256 p0,
-        bool p1,
-        uint256 p2,
-        address p3
-    ) internal view {
+    function log(uint256 p0, bool p1, uint256 p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,bool,uint,address)",
@@ -1555,12 +1238,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        bool p1,
-        string memory p2,
-        bool p3
-    ) internal view {
+    function log(uint256 p0, bool p1, string memory p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,bool,string,bool)",
@@ -1589,23 +1267,13 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        bool p1,
-        bool p2,
-        uint256 p3
-    ) internal view {
+    function log(uint256 p0, bool p1, bool p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,bool,bool,uint)", p0, p1, p2, p3)
         );
     }
 
-    function log(
-        uint256 p0,
-        bool p1,
-        bool p2,
-        string memory p3
-    ) internal view {
+    function log(uint256 p0, bool p1, bool p2, string memory p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,bool,bool,string)",
@@ -1617,23 +1285,13 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        bool p1,
-        bool p2,
-        bool p3
-    ) internal view {
+    function log(uint256 p0, bool p1, bool p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(uint,bool,bool,bool)", p0, p1, p2, p3)
         );
     }
 
-    function log(
-        uint256 p0,
-        bool p1,
-        bool p2,
-        address p3
-    ) internal view {
+    function log(uint256 p0, bool p1, bool p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,bool,bool,address)",
@@ -1645,12 +1303,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        bool p1,
-        address p2,
-        uint256 p3
-    ) internal view {
+    function log(uint256 p0, bool p1, address p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,bool,address,uint)",
@@ -1679,12 +1332,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        bool p1,
-        address p2,
-        bool p3
-    ) internal view {
+    function log(uint256 p0, bool p1, address p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,bool,address,bool)",
@@ -1696,12 +1344,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        bool p1,
-        address p2,
-        address p3
-    ) internal view {
+    function log(uint256 p0, bool p1, address p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,bool,address,address)",
@@ -1713,12 +1356,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        address p1,
-        uint256 p2,
-        uint256 p3
-    ) internal view {
+    function log(uint256 p0, address p1, uint256 p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,address,uint,uint)",
@@ -1747,12 +1385,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        address p1,
-        uint256 p2,
-        bool p3
-    ) internal view {
+    function log(uint256 p0, address p1, uint256 p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,address,uint,bool)",
@@ -1764,12 +1397,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        address p1,
-        uint256 p2,
-        address p3
-    ) internal view {
+    function log(uint256 p0, address p1, uint256 p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,address,uint,address)",
@@ -1849,12 +1477,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        address p1,
-        bool p2,
-        uint256 p3
-    ) internal view {
+    function log(uint256 p0, address p1, bool p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,address,bool,uint)",
@@ -1883,12 +1506,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        address p1,
-        bool p2,
-        bool p3
-    ) internal view {
+    function log(uint256 p0, address p1, bool p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,address,bool,bool)",
@@ -1900,12 +1518,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        address p1,
-        bool p2,
-        address p3
-    ) internal view {
+    function log(uint256 p0, address p1, bool p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,address,bool,address)",
@@ -1917,12 +1530,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        address p1,
-        address p2,
-        uint256 p3
-    ) internal view {
+    function log(uint256 p0, address p1, address p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,address,address,uint)",
@@ -1951,12 +1559,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        address p1,
-        address p2,
-        bool p3
-    ) internal view {
+    function log(uint256 p0, address p1, address p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,address,address,bool)",
@@ -1968,12 +1571,7 @@ library console {
         );
     }
 
-    function log(
-        uint256 p0,
-        address p1,
-        address p2,
-        address p3
-    ) internal view {
+    function log(uint256 p0, address p1, address p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(uint,address,address,address)",
@@ -2155,12 +1753,7 @@ library console {
         );
     }
 
-    function log(
-        string memory p0,
-        uint256 p1,
-        bool p2,
-        bool p3
-    ) internal view {
+    function log(string memory p0, uint256 p1, bool p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(string,uint,bool,bool)",
@@ -2563,12 +2156,7 @@ library console {
         );
     }
 
-    function log(
-        string memory p0,
-        bool p1,
-        uint256 p2,
-        bool p3
-    ) internal view {
+    function log(string memory p0, bool p1, uint256 p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(string,bool,uint,bool)",
@@ -2665,12 +2253,7 @@ library console {
         );
     }
 
-    function log(
-        string memory p0,
-        bool p1,
-        bool p2,
-        uint256 p3
-    ) internal view {
+    function log(string memory p0, bool p1, bool p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(string,bool,bool,uint)",
@@ -2699,12 +2282,7 @@ library console {
         );
     }
 
-    function log(
-        string memory p0,
-        bool p1,
-        bool p2,
-        bool p3
-    ) internal view {
+    function log(string memory p0, bool p1, bool p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(string,bool,bool,bool)",
@@ -2716,12 +2294,7 @@ library console {
         );
     }
 
-    function log(
-        string memory p0,
-        bool p1,
-        bool p2,
-        address p3
-    ) internal view {
+    function log(string memory p0, bool p1, bool p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(string,bool,bool,address)",
@@ -2767,12 +2340,7 @@ library console {
         );
     }
 
-    function log(
-        string memory p0,
-        bool p1,
-        address p2,
-        bool p3
-    ) internal view {
+    function log(string memory p0, bool p1, address p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(string,bool,address,bool)",
@@ -2971,12 +2539,7 @@ library console {
         );
     }
 
-    function log(
-        string memory p0,
-        address p1,
-        bool p2,
-        bool p3
-    ) internal view {
+    function log(string memory p0, address p1, bool p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(string,address,bool,bool)",
@@ -3073,12 +2636,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        uint256 p1,
-        uint256 p2,
-        uint256 p3
-    ) internal view {
+    function log(bool p0, uint256 p1, uint256 p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,uint,uint,uint)", p0, p1, p2, p3)
         );
@@ -3101,23 +2659,13 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        uint256 p1,
-        uint256 p2,
-        bool p3
-    ) internal view {
+    function log(bool p0, uint256 p1, uint256 p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,uint,uint,bool)", p0, p1, p2, p3)
         );
     }
 
-    function log(
-        bool p0,
-        uint256 p1,
-        uint256 p2,
-        address p3
-    ) internal view {
+    function log(bool p0, uint256 p1, uint256 p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,uint,uint,address)",
@@ -3163,12 +2711,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        uint256 p1,
-        string memory p2,
-        bool p3
-    ) internal view {
+    function log(bool p0, uint256 p1, string memory p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,uint,string,bool)",
@@ -3197,23 +2740,13 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        uint256 p1,
-        bool p2,
-        uint256 p3
-    ) internal view {
+    function log(bool p0, uint256 p1, bool p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,uint,bool,uint)", p0, p1, p2, p3)
         );
     }
 
-    function log(
-        bool p0,
-        uint256 p1,
-        bool p2,
-        string memory p3
-    ) internal view {
+    function log(bool p0, uint256 p1, bool p2, string memory p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,uint,bool,string)",
@@ -3225,23 +2758,13 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        uint256 p1,
-        bool p2,
-        bool p3
-    ) internal view {
+    function log(bool p0, uint256 p1, bool p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,uint,bool,bool)", p0, p1, p2, p3)
         );
     }
 
-    function log(
-        bool p0,
-        uint256 p1,
-        bool p2,
-        address p3
-    ) internal view {
+    function log(bool p0, uint256 p1, bool p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,uint,bool,address)",
@@ -3253,12 +2776,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        uint256 p1,
-        address p2,
-        uint256 p3
-    ) internal view {
+    function log(bool p0, uint256 p1, address p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,uint,address,uint)",
@@ -3287,12 +2805,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        uint256 p1,
-        address p2,
-        bool p3
-    ) internal view {
+    function log(bool p0, uint256 p1, address p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,uint,address,bool)",
@@ -3304,12 +2817,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        uint256 p1,
-        address p2,
-        address p3
-    ) internal view {
+    function log(bool p0, uint256 p1, address p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,uint,address,address)",
@@ -3355,12 +2863,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        string memory p1,
-        uint256 p2,
-        bool p3
-    ) internal view {
+    function log(bool p0, string memory p1, uint256 p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,string,uint,bool)",
@@ -3457,12 +2960,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        string memory p1,
-        bool p2,
-        uint256 p3
-    ) internal view {
+    function log(bool p0, string memory p1, bool p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,string,bool,uint)",
@@ -3491,12 +2989,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        string memory p1,
-        bool p2,
-        bool p3
-    ) internal view {
+    function log(bool p0, string memory p1, bool p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,string,bool,bool)",
@@ -3508,12 +3001,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        string memory p1,
-        bool p2,
-        address p3
-    ) internal view {
+    function log(bool p0, string memory p1, bool p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,string,bool,address)",
@@ -3559,12 +3047,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        string memory p1,
-        address p2,
-        bool p3
-    ) internal view {
+    function log(bool p0, string memory p1, address p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,string,address,bool)",
@@ -3593,23 +3076,13 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        uint256 p2,
-        uint256 p3
-    ) internal view {
+    function log(bool p0, bool p1, uint256 p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,bool,uint,uint)", p0, p1, p2, p3)
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        uint256 p2,
-        string memory p3
-    ) internal view {
+    function log(bool p0, bool p1, uint256 p2, string memory p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,bool,uint,string)",
@@ -3621,23 +3094,13 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        uint256 p2,
-        bool p3
-    ) internal view {
+    function log(bool p0, bool p1, uint256 p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,bool,uint,bool)", p0, p1, p2, p3)
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        uint256 p2,
-        address p3
-    ) internal view {
+    function log(bool p0, bool p1, uint256 p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,bool,uint,address)",
@@ -3649,12 +3112,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        string memory p2,
-        uint256 p3
-    ) internal view {
+    function log(bool p0, bool p1, string memory p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,bool,string,uint)",
@@ -3683,12 +3141,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        string memory p2,
-        bool p3
-    ) internal view {
+    function log(bool p0, bool p1, string memory p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,bool,string,bool)",
@@ -3700,12 +3153,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        string memory p2,
-        address p3
-    ) internal view {
+    function log(bool p0, bool p1, string memory p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,bool,string,address)",
@@ -3717,23 +3165,13 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        bool p2,
-        uint256 p3
-    ) internal view {
+    function log(bool p0, bool p1, bool p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,bool,bool,uint)", p0, p1, p2, p3)
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        bool p2,
-        string memory p3
-    ) internal view {
+    function log(bool p0, bool p1, bool p2, string memory p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,bool,bool,string)",
@@ -3745,23 +3183,13 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        bool p2,
-        bool p3
-    ) internal view {
+    function log(bool p0, bool p1, bool p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature("log(bool,bool,bool,bool)", p0, p1, p2, p3)
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        bool p2,
-        address p3
-    ) internal view {
+    function log(bool p0, bool p1, bool p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,bool,bool,address)",
@@ -3773,12 +3201,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        address p2,
-        uint256 p3
-    ) internal view {
+    function log(bool p0, bool p1, address p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,bool,address,uint)",
@@ -3790,12 +3213,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        address p2,
-        string memory p3
-    ) internal view {
+    function log(bool p0, bool p1, address p2, string memory p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,bool,address,string)",
@@ -3807,12 +3225,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        address p2,
-        bool p3
-    ) internal view {
+    function log(bool p0, bool p1, address p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,bool,address,bool)",
@@ -3824,12 +3237,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        bool p1,
-        address p2,
-        address p3
-    ) internal view {
+    function log(bool p0, bool p1, address p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,bool,address,address)",
@@ -3841,12 +3249,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        address p1,
-        uint256 p2,
-        uint256 p3
-    ) internal view {
+    function log(bool p0, address p1, uint256 p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,address,uint,uint)",
@@ -3875,12 +3278,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        address p1,
-        uint256 p2,
-        bool p3
-    ) internal view {
+    function log(bool p0, address p1, uint256 p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,address,uint,bool)",
@@ -3892,12 +3290,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        address p1,
-        uint256 p2,
-        address p3
-    ) internal view {
+    function log(bool p0, address p1, uint256 p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,address,uint,address)",
@@ -3943,12 +3336,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        address p1,
-        string memory p2,
-        bool p3
-    ) internal view {
+    function log(bool p0, address p1, string memory p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,address,string,bool)",
@@ -3977,12 +3365,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        address p1,
-        bool p2,
-        uint256 p3
-    ) internal view {
+    function log(bool p0, address p1, bool p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,address,bool,uint)",
@@ -3994,12 +3377,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        address p1,
-        bool p2,
-        string memory p3
-    ) internal view {
+    function log(bool p0, address p1, bool p2, string memory p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,address,bool,string)",
@@ -4011,12 +3389,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        address p1,
-        bool p2,
-        bool p3
-    ) internal view {
+    function log(bool p0, address p1, bool p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,address,bool,bool)",
@@ -4028,12 +3401,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        address p1,
-        bool p2,
-        address p3
-    ) internal view {
+    function log(bool p0, address p1, bool p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,address,bool,address)",
@@ -4045,12 +3413,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        address p1,
-        address p2,
-        uint256 p3
-    ) internal view {
+    function log(bool p0, address p1, address p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,address,address,uint)",
@@ -4079,12 +3442,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        address p1,
-        address p2,
-        bool p3
-    ) internal view {
+    function log(bool p0, address p1, address p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,address,address,bool)",
@@ -4096,12 +3454,7 @@ library console {
         );
     }
 
-    function log(
-        bool p0,
-        address p1,
-        address p2,
-        address p3
-    ) internal view {
+    function log(bool p0, address p1, address p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(bool,address,address,address)",
@@ -4113,12 +3466,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        uint256 p1,
-        uint256 p2,
-        uint256 p3
-    ) internal view {
+    function log(address p0, uint256 p1, uint256 p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,uint,uint,uint)",
@@ -4147,12 +3495,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        uint256 p1,
-        uint256 p2,
-        bool p3
-    ) internal view {
+    function log(address p0, uint256 p1, uint256 p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,uint,uint,bool)",
@@ -4164,12 +3507,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        uint256 p1,
-        uint256 p2,
-        address p3
-    ) internal view {
+    function log(address p0, uint256 p1, uint256 p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,uint,uint,address)",
@@ -4249,12 +3587,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        uint256 p1,
-        bool p2,
-        uint256 p3
-    ) internal view {
+    function log(address p0, uint256 p1, bool p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,uint,bool,uint)",
@@ -4283,12 +3616,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        uint256 p1,
-        bool p2,
-        bool p3
-    ) internal view {
+    function log(address p0, uint256 p1, bool p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,uint,bool,bool)",
@@ -4300,12 +3628,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        uint256 p1,
-        bool p2,
-        address p3
-    ) internal view {
+    function log(address p0, uint256 p1, bool p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,uint,bool,address)",
@@ -4317,12 +3640,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        uint256 p1,
-        address p2,
-        uint256 p3
-    ) internal view {
+    function log(address p0, uint256 p1, address p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,uint,address,uint)",
@@ -4351,12 +3669,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        uint256 p1,
-        address p2,
-        bool p3
-    ) internal view {
+    function log(address p0, uint256 p1, address p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,uint,address,bool)",
@@ -4368,12 +3681,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        uint256 p1,
-        address p2,
-        address p3
-    ) internal view {
+    function log(address p0, uint256 p1, address p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,uint,address,address)",
@@ -4555,12 +3863,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        string memory p1,
-        bool p2,
-        bool p3
-    ) internal view {
+    function log(address p0, string memory p1, bool p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,string,bool,bool)",
@@ -4657,12 +3960,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        bool p1,
-        uint256 p2,
-        uint256 p3
-    ) internal view {
+    function log(address p0, bool p1, uint256 p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,bool,uint,uint)",
@@ -4691,12 +3989,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        bool p1,
-        uint256 p2,
-        bool p3
-    ) internal view {
+    function log(address p0, bool p1, uint256 p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,bool,uint,bool)",
@@ -4708,12 +4001,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        bool p1,
-        uint256 p2,
-        address p3
-    ) internal view {
+    function log(address p0, bool p1, uint256 p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,bool,uint,address)",
@@ -4759,12 +4047,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        bool p1,
-        string memory p2,
-        bool p3
-    ) internal view {
+    function log(address p0, bool p1, string memory p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,bool,string,bool)",
@@ -4793,12 +4076,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        bool p1,
-        bool p2,
-        uint256 p3
-    ) internal view {
+    function log(address p0, bool p1, bool p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,bool,bool,uint)",
@@ -4810,12 +4088,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        bool p1,
-        bool p2,
-        string memory p3
-    ) internal view {
+    function log(address p0, bool p1, bool p2, string memory p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,bool,bool,string)",
@@ -4827,12 +4100,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        bool p1,
-        bool p2,
-        bool p3
-    ) internal view {
+    function log(address p0, bool p1, bool p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,bool,bool,bool)",
@@ -4844,12 +4112,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        bool p1,
-        bool p2,
-        address p3
-    ) internal view {
+    function log(address p0, bool p1, bool p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,bool,bool,address)",
@@ -4861,12 +4124,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        bool p1,
-        address p2,
-        uint256 p3
-    ) internal view {
+    function log(address p0, bool p1, address p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,bool,address,uint)",
@@ -4895,12 +4153,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        bool p1,
-        address p2,
-        bool p3
-    ) internal view {
+    function log(address p0, bool p1, address p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,bool,address,bool)",
@@ -4912,12 +4165,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        bool p1,
-        address p2,
-        address p3
-    ) internal view {
+    function log(address p0, bool p1, address p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,bool,address,address)",
@@ -4929,12 +4177,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        address p1,
-        uint256 p2,
-        uint256 p3
-    ) internal view {
+    function log(address p0, address p1, uint256 p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,address,uint,uint)",
@@ -4963,12 +4206,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        address p1,
-        uint256 p2,
-        bool p3
-    ) internal view {
+    function log(address p0, address p1, uint256 p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,address,uint,bool)",
@@ -4980,12 +4218,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        address p1,
-        uint256 p2,
-        address p3
-    ) internal view {
+    function log(address p0, address p1, uint256 p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,address,uint,address)",
@@ -5065,12 +4298,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        address p1,
-        bool p2,
-        uint256 p3
-    ) internal view {
+    function log(address p0, address p1, bool p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,address,bool,uint)",
@@ -5099,12 +4327,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        address p1,
-        bool p2,
-        bool p3
-    ) internal view {
+    function log(address p0, address p1, bool p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,address,bool,bool)",
@@ -5116,12 +4339,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        address p1,
-        bool p2,
-        address p3
-    ) internal view {
+    function log(address p0, address p1, bool p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,address,bool,address)",
@@ -5133,12 +4351,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        address p1,
-        address p2,
-        uint256 p3
-    ) internal view {
+    function log(address p0, address p1, address p2, uint256 p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,address,address,uint)",
@@ -5167,12 +4380,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        address p1,
-        address p2,
-        bool p3
-    ) internal view {
+    function log(address p0, address p1, address p2, bool p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,address,address,bool)",
@@ -5184,12 +4392,7 @@ library console {
         );
     }
 
-    function log(
-        address p0,
-        address p1,
-        address p2,
-        address p3
-    ) internal view {
+    function log(address p0, address p1, address p2, address p3) internal view {
         _sendLogPayload(
             abi.encodeWithSignature(
                 "log(address,address,address,address)",

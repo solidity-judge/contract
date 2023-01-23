@@ -19,14 +19,12 @@ interface IProblem {
 
     event UpdateSolution(address contestant, address solution);
 
-    function getContestantInfo(address contestant)
+    function getContestantInfo(
+        address contestant
+    )
         external
         view
-        returns (
-            address solution,
-            uint32 point,
-            bool isPointUpToDate
-        );
+        returns (address solution, uint32 point, bool isPointUpToDate);
 
     function updateSolution(address solution) external;
 

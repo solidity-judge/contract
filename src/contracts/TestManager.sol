@@ -25,11 +25,9 @@ abstract contract TestManager is Initializable, ITestManager {
         author = _author;
     }
 
-    function replaceTests(TestCase[] calldata newTests)
-        external
-        onlyAuthor
-        modifyTest
-    {
+    function replaceTests(
+        TestCase[] calldata newTests
+    ) external onlyAuthor modifyTest {
         for (uint256 i = 0; i < newTests.length; ++i) {
             tests[i] = newTests[i];
         }
