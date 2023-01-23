@@ -14,13 +14,9 @@ async function main() {
 
     // console.log(ethers.utils.formatBytes32String("leduykhongngu"));
 
-    const newProblemFactory = await deploy<ProblemFactory>(env, 'ProblemFactory', [deployment.gateFactory]);
+    const problem = await getContractAt<Problem>('Problem', '0x5ad2233a0bdc178442ebe2ec36c6ea456aa7448e');
 
-    const newProblem = await deploy<Problem>(env, 'Problem', []);
-    const problemFactory = await getContractAt<ProblemFactory>('ProblemFactory', deployment.problemFactory);
-
-    await problemFactory.upgradeTo(newProblemFactory.address, env.nonceManager.nonce());
-    await problemFactory.upgradeBeacon(newProblem.address, env.nonceManager.nonce());
+    console.log(await problem.runSolution('0x176f91d3ebd1d8bfc52abf299e7a940d8aa0db3c'));
 }
 
 main().then(() => {
