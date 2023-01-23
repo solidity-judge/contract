@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {DSTest} from "ds-test/test.sol";
-import {Vm} from "forge-std/Vm.sol";
+import {DSTest} from "../../../lib/ds-test/src/test.sol";
+import {Vm} from "../../../lib/forge-std/src/Vm.sol";
 
 //common utilities for forge tests
 contract Utilities is DSTest {
