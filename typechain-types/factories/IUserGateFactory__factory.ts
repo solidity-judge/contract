@@ -61,6 +61,25 @@ const _abi = [
         name: "user",
         type: "address",
       },
+    ],
+    name: "gates",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
       {
         internalType: "address",
         name: "solution",

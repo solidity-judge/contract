@@ -31,4 +31,6 @@ interface IProblem {
     function updateAndRunSolution(address solution) external;
 
     function runSolution(address contestant) external;
+
+    function gateUpdateAndRunSolution(address solution) external;
 }

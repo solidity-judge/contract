@@ -5,6 +5,7 @@ import {IProblem} from "../interfaces/IProblem.sol";
 import {ISolution} from "../interfaces/ISolution.sol";
 import {IChecker} from "../interfaces/IChecker.sol";
 import {IUserGateFactory} from "../interfaces/IUserGateFactory.sol";
+import {IGate} from "../interfaces/IGate.sol";
 import {TestManager, TestCase, Verdict} from "./TestManager.sol";
 import {ExcessivelySafeCall} from "../libraries/ExcessivelySafeCall.sol";
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
@@ -30,17 +31,29 @@ contract Problem is IProblem, TestManager {
         _TestManagerInit(_author);
     }
 
-    function getContestantInfo(
-        address contestant
-    )
+    function getContestantInfo(address contestant)
         public
         view
-        returns (address solution, uint32 point, bool isPointUpToDate)
+        returns (
+            address solution,
+            uint32 point,
+            bool isPointUpToDate
+        )
     {
         ContestantData memory data = contestants[contestant];
         solution = data.solution;
         point = data.point;
         isPointUpToDate = data.version == testVersion;
+    }
+
+    function gateUpdateAndRunSolution(address solution) external {
+        address user = IGate(msg.sender).user();
+        require(
+            IUserGateFactory(gateFactory).gates(user) == msg.sender,
+            "invalid gate & user"
+        );
+        _updateSolution(user, solution);
+        runSolution(user);
     }
 
     function updateAndRunSolution(address solution) external {
@@ -49,13 +62,17 @@ contract Problem is IProblem, TestManager {
     }
 
     function updateSolution(address solution) public {
+        _updateSolution(msg.sender, solution);
+    }
+
+    function _updateSolution(address user, address solution) public {
         require(
-            IUserGateFactory(gateFactory).verifySolution(msg.sender, solution),
+            IUserGateFactory(gateFactory).verifySolution(user, solution),
             "invalid solution"
         );
-        contestants[msg.sender].solution = solution;
+        contestants[user].solution = solution;
 
-        emit UpdateSolution(msg.sender, solution);
+        emit UpdateSolution(user, solution);
     }
 
     function runSolution(address contestant) public {
@@ -97,10 +114,10 @@ contract Problem is IProblem, TestManager {
         );
     }
 
-    function _runTest(
-        address solution,
-        TestCase memory test
-    ) internal returns (bool success, bytes memory result) {
+    function _runTest(address solution, TestCase memory test)
+        internal
+        returns (bool success, bytes memory result)
+    {
         (success, result) = ExcessivelySafeCall.excessivelySafeCall(
             solution,
             (test.gasLimit * 101) / 100, // 1% buffer

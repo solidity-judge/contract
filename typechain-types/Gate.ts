@@ -26,6 +26,7 @@ export interface GateInterface extends utils.Interface {
   functions: {
     "deploy(bytes)": FunctionFragment;
     "deployAndRun(bytes,bytes)": FunctionFragment;
+    "deployAndSubmit(bytes,address)": FunctionFragment;
     "initialize(address,string)": FunctionFragment;
     "nonce()": FunctionFragment;
     "solutionId(address)": FunctionFragment;
@@ -39,6 +40,10 @@ export interface GateInterface extends utils.Interface {
     values: [BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "deployAndSubmit",
+    values: [BytesLike, string]
+  ): string;
+  encodeFunctionData(
     functionFragment: "initialize",
     values: [string, string]
   ): string;
@@ -50,6 +55,10 @@ export interface GateInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "deploy", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "deployAndRun",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "deployAndSubmit",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
@@ -117,6 +126,12 @@ export interface Gate extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    deployAndSubmit(
+      bytecode: BytesLike,
+      problem: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     initialize(
       _user: string,
       _username: string,
@@ -143,6 +158,12 @@ export interface Gate extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  deployAndSubmit(
+    bytecode: BytesLike,
+    problem: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   initialize(
     _user: string,
     _username: string,
@@ -165,6 +186,12 @@ export interface Gate extends BaseContract {
       input: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    deployAndSubmit(
+      bytecode: BytesLike,
+      problem: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     initialize(
       _user: string,
@@ -204,6 +231,12 @@ export interface Gate extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    deployAndSubmit(
+      bytecode: BytesLike,
+      problem: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     initialize(
       _user: string,
       _username: string,
@@ -228,6 +261,12 @@ export interface Gate extends BaseContract {
     deployAndRun(
       bytecode: BytesLike,
       input: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    deployAndSubmit(
+      bytecode: BytesLike,
+      problem: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

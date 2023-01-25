@@ -38,11 +38,13 @@ export interface ProblemInterface extends utils.Interface {
   contractName: "Problem";
   functions: {
     "MAX_OUTPUT_SIZE()": FunctionFragment;
+    "_updateSolution(address,address)": FunctionFragment;
     "addTest((bytes,bytes32,uint224))": FunctionFragment;
     "author()": FunctionFragment;
     "checker()": FunctionFragment;
     "contestants(address)": FunctionFragment;
     "gateFactory()": FunctionFragment;
+    "gateUpdateAndRunSolution(address)": FunctionFragment;
     "getContestantInfo(address)": FunctionFragment;
     "id()": FunctionFragment;
     "initialize(uint256,address,address,address)": FunctionFragment;
@@ -61,6 +63,10 @@ export interface ProblemInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "_updateSolution",
+    values: [string, string]
+  ): string;
+  encodeFunctionData(
     functionFragment: "addTest",
     values: [TestCaseStruct]
   ): string;
@@ -70,6 +76,10 @@ export interface ProblemInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "gateFactory",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "gateUpdateAndRunSolution",
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "getContestantInfo",
@@ -111,6 +121,10 @@ export interface ProblemInterface extends utils.Interface {
     functionFragment: "MAX_OUTPUT_SIZE",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "_updateSolution",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "addTest", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "author", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "checker", data: BytesLike): Result;
@@ -120,6 +134,10 @@ export interface ProblemInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "gateFactory",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "gateUpdateAndRunSolution",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -228,6 +246,12 @@ export interface Problem extends BaseContract {
   functions: {
     MAX_OUTPUT_SIZE(overrides?: CallOverrides): Promise<[number]>;
 
+    _updateSolution(
+      user: string,
+      solution: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     addTest(
       test: TestCaseStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -249,6 +273,11 @@ export interface Problem extends BaseContract {
     >;
 
     gateFactory(overrides?: CallOverrides): Promise<[string]>;
+
+    gateUpdateAndRunSolution(
+      solution: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     getContestantInfo(
       contestant: string,
@@ -314,6 +343,12 @@ export interface Problem extends BaseContract {
 
   MAX_OUTPUT_SIZE(overrides?: CallOverrides): Promise<number>;
 
+  _updateSolution(
+    user: string,
+    solution: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   addTest(
     test: TestCaseStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -335,6 +370,11 @@ export interface Problem extends BaseContract {
   >;
 
   gateFactory(overrides?: CallOverrides): Promise<string>;
+
+  gateUpdateAndRunSolution(
+    solution: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   getContestantInfo(
     contestant: string,
@@ -400,6 +440,12 @@ export interface Problem extends BaseContract {
   callStatic: {
     MAX_OUTPUT_SIZE(overrides?: CallOverrides): Promise<number>;
 
+    _updateSolution(
+      user: string,
+      solution: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     addTest(test: TestCaseStruct, overrides?: CallOverrides): Promise<void>;
 
     author(overrides?: CallOverrides): Promise<string>;
@@ -418,6 +464,11 @@ export interface Problem extends BaseContract {
     >;
 
     gateFactory(overrides?: CallOverrides): Promise<string>;
+
+    gateUpdateAndRunSolution(
+      solution: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     getContestantInfo(
       contestant: string,
@@ -508,6 +559,12 @@ export interface Problem extends BaseContract {
   estimateGas: {
     MAX_OUTPUT_SIZE(overrides?: CallOverrides): Promise<BigNumber>;
 
+    _updateSolution(
+      user: string,
+      solution: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     addTest(
       test: TestCaseStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -520,6 +577,11 @@ export interface Problem extends BaseContract {
     contestants(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     gateFactory(overrides?: CallOverrides): Promise<BigNumber>;
+
+    gateUpdateAndRunSolution(
+      solution: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     getContestantInfo(
       contestant: string,
@@ -571,6 +633,12 @@ export interface Problem extends BaseContract {
   populateTransaction: {
     MAX_OUTPUT_SIZE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    _updateSolution(
+      user: string,
+      solution: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     addTest(
       test: TestCaseStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -586,6 +654,11 @@ export interface Problem extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     gateFactory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    gateUpdateAndRunSolution(
+      solution: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     getContestantInfo(
       contestant: string,

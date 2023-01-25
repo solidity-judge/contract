@@ -61,6 +61,19 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
+        name: "solution",
+        type: "address",
+      },
+    ],
+    name: "gateUpdateAndRunSolution",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
         name: "contestant",
         type: "address",
       },

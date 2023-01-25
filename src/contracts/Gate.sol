@@ -3,6 +3,7 @@ pragma solidity >=0.8.0;
 
 import "../interfaces/ISolution.sol";
 import "../interfaces/IGate.sol";
+import "../interfaces/IProblem.sol";
 import "@openzeppelin/contracts/utils/Create2.sol";
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
@@ -17,24 +18,35 @@ contract Gate is IGate, Initializable {
         _;
     }
 
-    function initialize(
-        address _user,
-        string memory _username
-    ) external initializer {
+    function initialize(address _user, string memory _username)
+        external
+        initializer
+    {
         user = _user;
         username = _username;
     }
 
-    function deploy(
-        bytes memory bytecode
-    ) external onlyUser returns (address solution) {
+    function deploy(bytes memory bytecode)
+        external
+        onlyUser
+        returns (address solution)
+    {
         return _deploy(bytecode);
     }
 
-    function deployAndRun(
-        bytes memory bytecode,
-        bytes memory input
-    ) external onlyUser returns (bytes memory output) {
+    function deployAndSubmit(bytes memory bytecode, address problem)
+        external
+        onlyUser
+    {
+        address solution = _deploy(bytecode);
+        IProblem(problem).gateUpdateAndRunSolution(solution);
+    }
+
+    function deployAndRun(bytes memory bytecode, bytes memory input)
+        external
+        onlyUser
+        returns (bytes memory output)
+    {
         address solution = _deploy(bytecode);
         output = ISolution(solution).execute(input);
     }

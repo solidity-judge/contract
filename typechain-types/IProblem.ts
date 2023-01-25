@@ -24,12 +24,17 @@ import type {
 export interface IProblemInterface extends utils.Interface {
   contractName: "IProblem";
   functions: {
+    "gateUpdateAndRunSolution(address)": FunctionFragment;
     "getContestantInfo(address)": FunctionFragment;
     "runSolution(address)": FunctionFragment;
     "updateAndRunSolution(address)": FunctionFragment;
     "updateSolution(address)": FunctionFragment;
   };
 
+  encodeFunctionData(
+    functionFragment: "gateUpdateAndRunSolution",
+    values: [string]
+  ): string;
   encodeFunctionData(
     functionFragment: "getContestantInfo",
     values: [string]
@@ -44,6 +49,10 @@ export interface IProblemInterface extends utils.Interface {
     values: [string]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "gateUpdateAndRunSolution",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "getContestantInfo",
     data: BytesLike
@@ -117,6 +126,11 @@ export interface IProblem extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    gateUpdateAndRunSolution(
+      solution: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     getContestantInfo(
       contestant: string,
       overrides?: CallOverrides
@@ -143,6 +157,11 @@ export interface IProblem extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
+
+  gateUpdateAndRunSolution(
+    solution: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   getContestantInfo(
     contestant: string,
@@ -171,6 +190,11 @@ export interface IProblem extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    gateUpdateAndRunSolution(
+      solution: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     getContestantInfo(
       contestant: string,
       overrides?: CallOverrides
@@ -217,6 +241,11 @@ export interface IProblem extends BaseContract {
   };
 
   estimateGas: {
+    gateUpdateAndRunSolution(
+      solution: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     getContestantInfo(
       contestant: string,
       overrides?: CallOverrides
@@ -239,6 +268,11 @@ export interface IProblem extends BaseContract {
   };
 
   populateTransaction: {
+    gateUpdateAndRunSolution(
+      solution: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     getContestantInfo(
       contestant: string,
       overrides?: CallOverrides

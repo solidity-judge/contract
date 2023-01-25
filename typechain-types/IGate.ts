@@ -27,6 +27,7 @@ export interface IGateInterface extends utils.Interface {
     "deploy(bytes)": FunctionFragment;
     "deployAndRun(bytes,bytes)": FunctionFragment;
     "solutionId(address)": FunctionFragment;
+    "user()": FunctionFragment;
     "username()": FunctionFragment;
   };
 
@@ -36,6 +37,7 @@ export interface IGateInterface extends utils.Interface {
     values: [BytesLike, BytesLike]
   ): string;
   encodeFunctionData(functionFragment: "solutionId", values: [string]): string;
+  encodeFunctionData(functionFragment: "user", values?: undefined): string;
   encodeFunctionData(functionFragment: "username", values?: undefined): string;
 
   decodeFunctionResult(functionFragment: "deploy", data: BytesLike): Result;
@@ -44,6 +46,7 @@ export interface IGateInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "solutionId", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "user", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "username", data: BytesLike): Result;
 
   events: {
@@ -104,6 +107,8 @@ export interface IGate extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { id: BigNumber }>;
 
+    user(overrides?: CallOverrides): Promise<[string]>;
+
     username(
       overrides?: CallOverrides
     ): Promise<[string] & { username: string }>;
@@ -122,6 +127,8 @@ export interface IGate extends BaseContract {
 
   solutionId(solution: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+  user(overrides?: CallOverrides): Promise<string>;
+
   username(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
@@ -134,6 +141,8 @@ export interface IGate extends BaseContract {
     ): Promise<string>;
 
     solutionId(solution: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    user(overrides?: CallOverrides): Promise<string>;
 
     username(overrides?: CallOverrides): Promise<string>;
   };
@@ -160,6 +169,8 @@ export interface IGate extends BaseContract {
 
     solutionId(solution: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    user(overrides?: CallOverrides): Promise<BigNumber>;
+
     username(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
@@ -179,6 +190,8 @@ export interface IGate extends BaseContract {
       solution: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    user(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     username(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };

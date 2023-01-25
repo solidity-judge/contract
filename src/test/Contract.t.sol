@@ -22,12 +22,27 @@ contract ContractTest is DSTest {
     }
 
     function testExample() public {
-        bytes32 name = 0x6c656475796b686f6e676e677500000000000000000000000000000000000000;
-        bytes memory data = abi.encodeWithSignature(
-            "initialize(address,bytes)",
-            address(this),
-            abi.encodePacked(name)
+        Token t = new Token();
+        address(t).call(
+            abi.encodeWithSelector(
+                Token.transferFrom.selector,
+                address(1),
+                2,
+                3,
+                address(2),
+                5
+            )
         );
-        address(this).call(data);
+
+        console.logBytes32(Token.transferFrom.selector);
+        console.logBytes32(SimpleSwap.swap.selector);
     }
+}
+
+contract SimpleSwap {
+    function swap(address s, uint256 a) external {}
+}
+
+contract Token {
+    function transferFrom(address s, uint256 a) external {}
 }

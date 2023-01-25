@@ -25,16 +25,19 @@ export interface IUserGateFactoryInterface extends utils.Interface {
   contractName: "IUserGateFactory";
   functions: {
     "createGate(string)": FunctionFragment;
+    "gates(address)": FunctionFragment;
     "verifySolution(address,address)": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "createGate", values: [string]): string;
+  encodeFunctionData(functionFragment: "gates", values: [string]): string;
   encodeFunctionData(
     functionFragment: "verifySolution",
     values: [string, string]
   ): string;
 
   decodeFunctionResult(functionFragment: "createGate", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "gates", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "verifySolution",
     data: BytesLike
@@ -87,6 +90,8 @@ export interface IUserGateFactory extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    gates(user: string, overrides?: CallOverrides): Promise<[string]>;
+
     verifySolution(
       user: string,
       solution: string,
@@ -99,6 +104,8 @@ export interface IUserGateFactory extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  gates(user: string, overrides?: CallOverrides): Promise<string>;
+
   verifySolution(
     user: string,
     solution: string,
@@ -107,6 +114,8 @@ export interface IUserGateFactory extends BaseContract {
 
   callStatic: {
     createGate(username: string, overrides?: CallOverrides): Promise<string>;
+
+    gates(user: string, overrides?: CallOverrides): Promise<string>;
 
     verifySolution(
       user: string,
@@ -134,6 +143,8 @@ export interface IUserGateFactory extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    gates(user: string, overrides?: CallOverrides): Promise<BigNumber>;
+
     verifySolution(
       user: string,
       solution: string,
@@ -145,6 +156,11 @@ export interface IUserGateFactory extends BaseContract {
     createGate(
       username: string,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    gates(
+      user: string,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     verifySolution(

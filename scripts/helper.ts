@@ -16,6 +16,8 @@ export async function verifyContract(contract: string, constructor: any[]) {
         let errStr: string = err.toString();
         if (errStr.includes('Already Verified')) {
             console.log('[VERIFIED] Nice. Alr Verified');
+        } else if (errStr.includes('hardhat')) {
+
         } else {
             console.log('[FATAL] Error occured while verifying contract');
             console.log(errStr);
