@@ -21,7 +21,7 @@
     "solhint:check": "solhint --config ./.solhint.json 'src/**/*.sol'",
     "lint": "yarn prettier && yarn solhint",
     "lint:check": "yarn prettier:check && yarn solhint:check",
-    "build": "tsdx build --tsconfig tsconfig.build.json --entry src/SDK/index.ts"
+    "build": "tsdx build --tsconfig tsconfig.build.json --entry src/SDK/index.ts && mv dist/SDK/* dist/ && rm -rf dist/SDK"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
