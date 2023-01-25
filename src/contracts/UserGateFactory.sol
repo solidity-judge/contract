@@ -22,10 +22,9 @@ contract UserGateFactory is
 
     constructor() initializer {}
 
-    function createGate(string memory username)
-        external
-        returns (address gate)
-    {
+    function createGate(
+        string memory username
+    ) external returns (address gate) {
         address user = msg.sender;
         require(gates[user] == address(0), "gate for user already created");
 
@@ -41,11 +40,10 @@ contract UserGateFactory is
         emit CreateGate(user, username, gate);
     }
 
-    function verifySolution(address user, address solution)
-        external
-        view
-        returns (bool)
-    {
+    function verifySolution(
+        address user,
+        address solution
+    ) external view returns (bool) {
         address gate = gates[user];
         require(gate != address(0), "gate for user not created");
         return IGate(gate).solutionId(solution) > 0;

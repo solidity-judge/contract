@@ -31,14 +31,12 @@ contract Problem is IProblem, TestManager {
         _TestManagerInit(_author);
     }
 
-    function getContestantInfo(address contestant)
+    function getContestantInfo(
+        address contestant
+    )
         public
         view
-        returns (
-            address solution,
-            uint32 point,
-            bool isPointUpToDate
-        )
+        returns (address solution, uint32 point, bool isPointUpToDate)
     {
         ContestantData memory data = contestants[contestant];
         solution = data.solution;
@@ -114,10 +112,10 @@ contract Problem is IProblem, TestManager {
         );
     }
 
-    function _runTest(address solution, TestCase memory test)
-        internal
-        returns (bool success, bytes memory result)
-    {
+    function _runTest(
+        address solution,
+        TestCase memory test
+    ) internal returns (bool success, bytes memory result) {
         (success, result) = ExcessivelySafeCall.excessivelySafeCall(
             solution,
             (test.gasLimit * 101) / 100, // 1% buffer

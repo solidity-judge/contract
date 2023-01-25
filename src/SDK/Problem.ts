@@ -1,12 +1,19 @@
-import { RpcSigner } from "./type";
-import { Gate, Gate__factory, Problem, Problem__factory, UserGateFactory, UserGateFactory__factory } from "../../typechain-types";
-import { Contract, ethers } from "ethers";
-import DEPLOYMENT from '../../deployment.json'
+import { RpcSigner } from './type';
+import {
+    Gate,
+    Gate__factory,
+    Problem,
+    Problem__factory,
+    UserGateFactory,
+    UserGateFactory__factory,
+} from '../../typechain-types';
+import { Contract, ethers } from 'ethers';
+import DEPLOYMENT from '../../deployment.json';
 export type ProblemConfig = {
     inputFormat: string[];
     outputFormat: string[];
     problem: string;
-}
+};
 
 export class ProblemSDK {
     readonly gateFactory: UserGateFactory;
@@ -17,20 +24,12 @@ export class ProblemSDK {
             UserGateFactory__factory.abi,
             signer
         ) as UserGateFactory;
-        this.problem = new Contract(
-            problemConfig.problem,
-            Problem__factory.abi,
-            signer
-        ) as Problem;
+        this.problem = new Contract(problemConfig.problem, Problem__factory.abi, signer) as Problem;
     }
 
     async deployAndRunExample(inputs: string[], bytecode: string): Promise<string[]> {
         const userGate = await this.gateFactory.callStatic.gates(this.userAddr);
-        const gate = new Contract(
-            userGate,
-            Gate__factory.abi,
-            this.signer
-        ) as Gate;
+        const gate = new Contract(userGate, Gate__factory.abi, this.signer) as Gate;
 
         const encodedInput = ethers.utils.defaultAbiCoder.encode(this.problemConfig.inputFormat, inputs);
 
