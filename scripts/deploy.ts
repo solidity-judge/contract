@@ -1,12 +1,12 @@
-import { env, exit } from "process"
-import hre from "hardhat";
-import { prepEnv, writeDeployment } from "./env";
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { deploy, deployProxy, getContractAt, verifyContract } from "./helper";
-import { Gate, ISolution, Problem, ProblemFactory, UserGateFactory } from "../typechain-types";
-import { ethers } from "ethers";
-import { write } from "fs";
-import deployment from "../deployment.json";
+import { env, exit } from 'process';
+import hre from 'hardhat';
+import { prepEnv, writeDeployment } from './env';
+import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
+import { deploy, deployProxy, getContractAt, verifyContract } from './helper';
+import { Gate, ISolution, Problem, ProblemFactory, UserGateFactory } from '../typechain-types';
+import { ethers } from 'ethers';
+import { write } from 'fs';
+import deployment from '../deployment.json';
 
 async function main() {
     const [deployer]: SignerWithAddress[] = await hre.ethers.getSigners();
@@ -20,10 +20,9 @@ async function main() {
     await env.gateFactory.upgradeBeacon(newGateImpl.address, env.nonceManager.nonce());
     await env.problemFactory.upgradeBeacon(newProblemImpl.address, env.nonceManager.nonce());
 
-
     console.log(env.gateFactory.address);
 }
 
 main().then(() => {
     exit(0);
-})
+});

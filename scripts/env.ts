@@ -1,11 +1,10 @@
-import { IProblemFactory, IUserGateFactory, ProblemFactory, UserGateFactory } from "../typechain-types";
-import deployment from "../deployment.json";
+import { IProblemFactory, IUserGateFactory, ProblemFactory, UserGateFactory } from '../typechain-types';
+import deployment from '../deployment.json';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
-import hre from "hardhat";
-import { getContractAt } from "./helper";
+import hre from 'hardhat';
+import { getContractAt } from './helper';
 import fs from 'fs';
 import path from 'path';
-
 
 export class NonceManager {
     deployer: SignerWithAddress;
@@ -52,7 +51,6 @@ export class NonceManager {
     }
 }
 
-
 export interface Environment {
     nonceManager: NonceManager;
     gateFactory: UserGateFactory;
@@ -63,26 +61,26 @@ export async function prepEnv(deployer: SignerWithAddress): Promise<Environment>
     let env: Environment = {} as any;
     env.nonceManager = new NonceManager(deployer);
     await env.nonceManager.prepNonce();
-    if (deployment.gateFactory != "") {
+    if (deployment.gateFactory != '') {
         env.gateFactory = await getContractAt<UserGateFactory>('UserGateFactory', deployment.gateFactory);
     }
 
-    if (deployment.problemFactory != "") {
+    if (deployment.problemFactory != '') {
         env.problemFactory = await getContractAt<ProblemFactory>('ProblemFactory', deployment.problemFactory);
     }
     return env;
 }
 
-
 export function writeDeployment(env: Environment) {
     fs.writeFileSync(
-        path.resolve(
-            __dirname,
-            `../deployment.json`
-        ),
-        JSON.stringify({
-            gateFactory: env.gateFactory.address,
-            problemFactory: env.problemFactory.address
-        }, null, 4)
+        path.resolve(__dirname, `../deployment.json`),
+        JSON.stringify(
+            {
+                gateFactory: env.gateFactory.address,
+                problemFactory: env.problemFactory.address,
+            },
+            null,
+            4
+        )
     );
 }
