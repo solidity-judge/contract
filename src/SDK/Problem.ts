@@ -32,4 +32,10 @@ export class ProblemSDK {
             return x.toString();
         });
     }
+
+    async submitSolution(bytecode: string) {
+        const userGate = await this.gateFactory.callStatic.gates(this.userAddr);
+        const gate = new Contract(userGate, IGateAbi, this.signer) as Gate;
+        return gate.deployAndSubmit(bytecode, this.problem.address);
+    }
 }
