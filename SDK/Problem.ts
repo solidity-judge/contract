@@ -1,7 +1,7 @@
 import { RpcSigner } from './type';
-import { Gate, Problem, UserGateFactory } from '../../typechain-types';
+import { Gate, Problem, UserGateFactory } from '../typechain-types';
 import { Contract, ethers } from 'ethers';
-import DEPLOYMENT from '../../deployment.json';
+import DEPLOYMENT from '../deployment.json';
 import { IGateAbi, IProblemAbi, IUserGateFactoryAbi } from './abis';
 export type ProblemConfig = {
     inputFormat: string[];

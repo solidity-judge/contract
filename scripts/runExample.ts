@@ -1,7 +1,7 @@
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import hre from 'hardhat';
 import { exit } from 'process';
-import { ProblemSDK } from '../src/SDK/Problem';
+import { ProblemSDK } from '../SDK/Problem';
 
 async function main() {
     const [deployer]: SignerWithAddress[] = await hre.ethers.getSigners();

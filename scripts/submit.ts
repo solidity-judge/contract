@@ -4,8 +4,6 @@ import { prepEnv, writeDeployment } from './env';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { getContractAt } from './helper';
 import { Gate, Problem } from '../typechain-types';
-import { ethers } from 'ethers';
-import { ProblemSDK } from '../src/SDK/Problem';
 
 async function main() {
     const [deployer]: SignerWithAddress[] = await hre.ethers.getSigners();

@@ -12,5 +12,5 @@
         "resolveJsonModule": true,
         "strict": true
     },
-    "include": ["src/SDK/**/*"]
+    "include": ["SDK/**/*", "typechain-types/**/*"],
 }
