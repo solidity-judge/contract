@@ -1,6 +1,6 @@
 import { RpcSigner } from './type';
 import { Gate, Problem, UserGateFactory } from '../typechain-types';
-import { BigNumber, Contract, ethers } from 'ethers';
+import { BigNumber, CallOverrides, Contract, ethers } from 'ethers';
 import DEPLOYMENT from '../deployment.json';
 import { IGateAbi, IProblemAbi, IUserGateFactoryAbi } from './abis';
 import { isSameAddress } from './helper';
@@ -23,11 +23,17 @@ export enum TestCaseVerdict {
     Revert = 2,
 }
 
+export type TestCase = {
+    input: string;
+    gasLimit: number;
+};
+
 export type SubmissionResult = {
     contestant: string;
     version: number;
     point: number;
     verdicts: TestCaseVerdict[];
+    tests: TestCase[];
 };
 
 export class ProblemSDK {
@@ -60,6 +66,19 @@ export class ProblemSDK {
         return gate.deployAndSubmit(bytecode, this.problem.address);
     }
 
+    async getTests(overrides: CallOverrides = {}): Promise<TestCase[]> {
+        const testCount = (await this.problem.callStatic.testLength(overrides)).toNumber();
+        const tests = [];
+        for (let i = 0; i < testCount; i++) {
+            const test = await this.problem.callStatic.tests(i, overrides);
+            tests.push({
+                input: test.input,
+                gasLimit: test.gasLimit.toNumber(),
+            });
+        }
+        return tests;
+    }
+
     async parseSubmissionVerdict(txHash: string): Promise<SubmissionResult> {
         const tx = await this.signer.provider!.getTransactionReceipt(txHash);
         const filter = this.problem.filters.RunSolution();
@@ -67,7 +86,7 @@ export class ProblemSDK {
             .filter((log) => isSameAddress(log.topics[0], filter.topics![0] as string))
             .map((log) => {
                 const raw: SubmissionResultRaw = this.problem.interface.parseLog(log)['args'] as any;
-                const result: SubmissionResult = {
+                const result: Omit<SubmissionResult, 'tests'> = {
                     contestant: raw.contestant,
                     version: raw.version.toNumber(),
                     point: raw.point.toNumber() / 100,
@@ -80,6 +99,9 @@ export class ProblemSDK {
             throw new Error('No RunSolution event found');
         }
 
-        return runSolutionEvents[0];
+        return {
+            ...runSolutionEvents[0],
+            tests: await this.getTests({ blockTag: tx.blockNumber }),
+        };
     }
 }
