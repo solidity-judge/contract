@@ -1,6 +1,6 @@
 import { RpcSigner } from './type';
 import { Gate, Problem, UserGateFactory } from '../typechain-types';
-import { BigNumber, CallOverrides, Contract, ethers } from 'ethers';
+import { BigNumber, BigNumberish, CallOverrides, Contract, ethers } from 'ethers';
 import DEPLOYMENT from '../deployment.json';
 import { IGateAbi, IProblemAbi, IUserGateFactoryAbi } from './abis';
 import { isSameAddress } from './helper';
@@ -42,6 +42,19 @@ export class ProblemSDK {
     constructor(readonly problemConfig: ProblemConfig, readonly userAddr: string, readonly signer: RpcSigner) {
         this.gateFactory = new Contract(DEPLOYMENT.gateFactory, IUserGateFactoryAbi, signer) as UserGateFactory;
         this.problem = new Contract(problemConfig.address, IProblemAbi, signer) as Problem;
+    }
+
+    async addTest(inputs: BigNumberish[], outputs: BigNumberish[], gasLimit: number) {
+        const encodedInput = ethers.utils.defaultAbiCoder.encode(this.problemConfig.inputFormat, inputs);
+        const encodedOutput = ethers.utils.keccak256(
+            ethers.utils.defaultAbiCoder.encode(this.problemConfig.outputFormat, outputs)
+        );
+
+        return this.problem.addTest({
+            input: encodedInput,
+            output: encodedOutput,
+            gasLimit: gasLimit,
+        });
     }
 
     async deployAndRunExample(inputs: string[], bytecode: string): Promise<string[]> {
