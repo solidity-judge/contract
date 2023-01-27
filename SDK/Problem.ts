@@ -24,7 +24,7 @@ export enum TestCaseVerdict {
 }
 
 export type TestCase = {
-    input: string;
+    input: string[];
     gasLimit: number;
 };
 
@@ -45,10 +45,8 @@ export class ProblemSDK {
     }
 
     async addTest(inputs: BigNumberish[], outputs: BigNumberish[], gasLimit: number) {
-        const encodedInput = ethers.utils.defaultAbiCoder.encode(this.problemConfig.inputFormat, inputs);
-        const encodedOutput = ethers.utils.keccak256(
-            ethers.utils.defaultAbiCoder.encode(this.problemConfig.outputFormat, outputs)
-        );
+        const encodedInput = this.encodeData(inputs, this.problemConfig.inputFormat);
+        const encodedOutput = ethers.utils.keccak256(this.encodeData(outputs, this.problemConfig.outputFormat));
 
         return this.problem.addTest({
             input: encodedInput,
@@ -61,16 +59,10 @@ export class ProblemSDK {
         const userGate = await this.gateFactory.callStatic.gates(this.userAddr);
         const gate = new Contract(userGate, IGateAbi, this.signer) as Gate;
 
-        const encodedInput = ethers.utils.defaultAbiCoder.encode(this.problemConfig.inputFormat, inputs);
+        const encodedInput = this.encodeData(inputs, this.problemConfig.inputFormat);
 
         const encodedOutput = await gate.callStatic.deployAndRun(bytecode, encodedInput);
-        const decodedOutput = ethers.utils.defaultAbiCoder.decode(this.problemConfig.outputFormat, encodedOutput);
-        return decodedOutput.map((x: any) => {
-            if (Array.isArray(x)) {
-                return x.map((y: any) => y.toString()).join(',');
-            }
-            return x.toString();
-        });
+        return this.decodeData(encodedOutput, this.problemConfig.outputFormat);
     }
 
     async submitSolution(bytecode: string) {
@@ -85,7 +77,7 @@ export class ProblemSDK {
         for (let i = 0; i < testCount; i++) {
             const test = await this.problem.callStatic.tests(i, overrides);
             tests.push({
-                input: test.input,
+                input: this.decodeData(test.input, this.problemConfig.inputFormat),
                 gasLimit: test.gasLimit.toNumber(),
             });
         }
@@ -116,5 +108,19 @@ export class ProblemSDK {
             ...runSolutionEvents[0],
             tests: await this.getTests({ blockTag: tx.blockNumber }),
         };
+    }
+
+    private decodeData(data: string, format: string[]): string[] {
+        const decoded = ethers.utils.defaultAbiCoder.decode(format, data);
+        return decoded.map((x: any) => {
+            if (Array.isArray(x)) {
+                return x.map((y: any) => y.toString()).join(',');
+            }
+            return x.toString();
+        });
+    }
+
+    private encodeData(data: BigNumberish[], format: string[]): string {
+        return ethers.utils.defaultAbiCoder.encode(format, data);
     }
 }
