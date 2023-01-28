@@ -4,6 +4,7 @@ import { BigNumber, BigNumberish, CallOverrides, Contract, ethers } from 'ethers
 import DEPLOYMENT from '../../deployment.json';
 import { IGateAbi, IProblemAbi, IUserGateFactoryAbi } from '../abis';
 import { isSameAddress } from '../helper';
+import { TransactionReceipt } from '@ethersproject/abstract-provider';
 
 export type ProblemConfig = {
     inputFormat: string[];
@@ -59,10 +60,10 @@ export class ProblemSDK {
         return tests;
     }
 
-    async parseSubmissionVerdict(txHash: string): Promise<SubmissionResult> {
-        const tx = await this.signer.provider!.getTransactionReceipt(txHash);
+    async parseSubmissionVerdict(tx: string | TransactionReceipt): Promise<SubmissionResult> {
+        const txReceipt = typeof tx === 'string' ? await this.signer.provider!.getTransactionReceipt(tx) : tx;
         const filter = this.problem.filters.RunSolution();
-        let runSolutionEvents = tx.logs
+        let runSolutionEvents = txReceipt.logs
             .filter((log) => isSameAddress(log.topics[0], filter.topics![0] as string))
             .map((log) => {
                 const raw: SubmissionResultRaw = this.problem.interface.parseLog(log)['args'] as any;
@@ -81,7 +82,7 @@ export class ProblemSDK {
 
         return {
             ...runSolutionEvents[0],
-            tests: await this.getTests({ blockTag: tx.blockNumber }),
+            tests: await this.getTests({ blockTag: txReceipt.blockNumber }),
         };
     }
 
