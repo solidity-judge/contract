@@ -1,39 +1,14 @@
-import { RpcSigner } from './type';
-import { Gate, Problem, UserGateFactory } from '../typechain-types';
+import { RpcSigner, SubmissionResult, SubmissionResultRaw, TestCase } from '../type';
+import { Gate, Problem, UserGateFactory } from '../../typechain-types';
 import { BigNumber, BigNumberish, CallOverrides, Contract, ethers } from 'ethers';
-import DEPLOYMENT from '../deployment.json';
-import { IGateAbi, IProblemAbi, IUserGateFactoryAbi } from './abis';
-import { isSameAddress } from './helper';
+import DEPLOYMENT from '../../deployment.json';
+import { IGateAbi, IProblemAbi, IUserGateFactoryAbi } from '../abis';
+import { isSameAddress } from '../helper';
+
 export type ProblemConfig = {
     inputFormat: string[];
     outputFormat: string[];
     address: string;
-};
-
-type SubmissionResultRaw = {
-    contestant: string;
-    version: BigNumber;
-    point: BigNumber;
-    verdicts: number[];
-};
-
-export enum TestCaseVerdict {
-    Accepted = 0,
-    WrongAnswer = 1,
-    Revert = 2,
-}
-
-export type TestCase = {
-    input: string[];
-    gasLimit: number;
-};
-
-export type SubmissionResult = {
-    contestant: string;
-    version: number;
-    point: number;
-    verdicts: TestCaseVerdict[];
-    tests: TestCase[];
 };
 
 export class ProblemSDK {

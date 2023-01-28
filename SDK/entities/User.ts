@@ -1,9 +1,11 @@
-import { RpcSigner } from './type';
-import { Gate, Problem, UserGateFactory } from '../typechain-types';
-import { BigNumber, BigNumberish, CallOverrides, Contract, ethers } from 'ethers';
-import DEPLOYMENT from '../deployment.json';
-import { IGateAbi, IProblemAbi, IUserGateFactoryAbi } from './abis';
-import { isSameAddress } from './helper';
+import { Contract, ethers } from 'ethers';
+import DEPLOYMENT from '../../deployment.json';
+import { Gate, UserGateFactory } from '../../typechain-types';
+import { IGateAbi, IUserGateFactoryAbi } from '../abis';
+import { RpcSigner } from '../type';
+import request from 'graphql-request';
+import { USERS_QUERY, UserDto } from '../subgraph';
+import { SUBGRAPH_ENDPOINT } from '../consts';
 
 export class UserSdk {
     readonly gateFactory: UserGateFactory;
@@ -26,5 +28,13 @@ export class UserSdk {
             throw new Error('Already registered');
         }
         return this.gateFactory.createGate(username);
+    }
+
+    async users({ limit = 10, skip = 0 }) {
+        const results = await request<{ data: UserDto[] }>(SUBGRAPH_ENDPOINT, USERS_QUERY, {
+            limit,
+            skip,
+        });
+        return results.data;
     }
 }
