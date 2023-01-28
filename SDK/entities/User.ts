@@ -30,11 +30,21 @@ export class UserSdk {
         return this.gateFactory.createGate(username);
     }
 
-    static async users({ limit = 10, skip = 0 } = {}): Promise<UserDto[]> {
-        const results = await request<{ data: UserDto[] }>(SUBGRAPH_ENDPOINT, USERS_QUERY, {
-            limit,
-            skip,
-        });
-        return results.data;
+    static async users({ limit = 10, skip = 0 } = {}): Promise<{
+        users: UserDto[];
+        total: number;
+    }> {
+        const results = await request<{ data: UserDto[]; total: { syncingIndex: number } }>(
+            SUBGRAPH_ENDPOINT,
+            USERS_QUERY,
+            {
+                limit,
+                skip,
+            }
+        );
+        return {
+            users: results.data,
+            total: results.total.syncingIndex,
+        };
     }
 }

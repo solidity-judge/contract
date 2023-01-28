@@ -7,6 +7,9 @@ export const USERS_QUERY = gql`
             username: id
             address: user
         }
+        total: bundle(id: "users") {
+            syncingIndex
+        }
     }
 `;
 

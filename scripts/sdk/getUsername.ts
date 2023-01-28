@@ -13,7 +13,7 @@ async function main() {
     const userSdk = new UserSdk(deployer);
     console.log(await userSdk.getUsername(deployer.address));
     console.log(await userSdk.getUsername(zeroAddress()));
-    console.log(await userSdk.users());
+    console.log(await UserSdk.users());
 }
 
 main().then(() => {
