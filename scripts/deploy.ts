@@ -1,12 +1,9 @@
-import { env, exit } from 'process';
-import hre from 'hardhat';
-import { prepEnv, writeDeployment } from './env';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
-import { deploy, deployProxy, getContractAt, verifyContract } from './helper';
-import { Gate, ISolution, Problem, ProblemFactory, UserGateFactory } from '../typechain-types';
-import { ethers } from 'ethers';
-import { write } from 'fs';
-import deployment from '../deployment.json';
+import hre from 'hardhat';
+import { exit } from 'process';
+import { Gate, Problem, UserGateFactory } from '../typechain-types';
+import { prepEnv } from './env';
+import { deploy } from './helper';
 
 async function main() {
     const [deployer]: SignerWithAddress[] = await hre.ethers.getSigners();

@@ -13,7 +13,7 @@ export async function verifyContract(contract: string, constructor: any[]) {
             constructorArguments: constructor,
         });
     } catch (err) {
-        let errStr: string = err.toString();
+        let errStr: string = (err as any).toString();
         if (errStr.includes('Already Verified')) {
             console.log('[VERIFIED] Nice. Alr Verified');
         } else if (errStr.includes('hardhat')) {

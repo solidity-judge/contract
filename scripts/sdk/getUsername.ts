@@ -1,8 +1,8 @@
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import hre from 'hardhat';
 import { exit } from 'process';
-import { UserSdk } from '../SDK';
-import { prepEnv } from './env';
+import { UserSdk } from '../../SDK';
+import { prepEnv } from '../env';
 import { zeroAddress } from '@nomicfoundation/ethereumjs-util';
 
 async function main() {
