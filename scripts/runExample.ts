@@ -11,7 +11,7 @@ async function main() {
         {
             inputFormat: ['uint256', 'uint256'],
             outputFormat: ['uint256'],
-            problem: '0x5ad2233a0bdc178442ebe2ec36c6ea456aa7448e',
+            address: '0x5ad2233a0bdc178442ebe2ec36c6ea456aa7448e',
         },
         deployer.address,
         deployer

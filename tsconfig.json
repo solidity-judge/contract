@@ -10,5 +10,5 @@
         "resolveJsonModule": true,
         "strict": true
     },
-    "include": ["src/**/*", "scripts/**/*", "SDK"]
+    "include": ["src/**/*", "scripts/**/*", "SDK", "hardhat.config.ts"]
 }

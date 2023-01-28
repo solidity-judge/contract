@@ -1,4 +1,8 @@
-import { solidityCompiler, getCompilerVersions } from '@agnostico/browser-solidity-compiler';
+let solComp: any = null;
+
+if (typeof window !== 'undefined') {
+    solComp = require('@agnostico/browser-solidity-compiler');
+}
 
 export function isSameAddress(a: string, b: string) {
     return a.toLowerCase() === b.toLowerCase();
@@ -9,14 +13,14 @@ export async function getCompilerVersion() {
     if (compilerVersion !== '') {
         return compilerVersion;
     }
-    const results = (await getCompilerVersions()) as any;
+    const results = (await solComp.getCompilerVersions()) as any;
     compilerVersion = results.releases[results.latestRelease];
     return compilerVersion;
 }
 
 export async function compileSolidity(source: string) {
     const version = await getCompilerVersion();
-    const output = (await solidityCompiler({
+    const output = (await solComp.solidityCompiler({
         version: `https://binaries.soliditylang.org/bin/${version}`,
         contractBody: source,
     })) as any;
