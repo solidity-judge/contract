@@ -26,22 +26,13 @@ export interface IUserGateFactoryInterface extends utils.Interface {
   functions: {
     "createGate(string)": FunctionFragment;
     "gates(address)": FunctionFragment;
-    "verifySolution(address,address)": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "createGate", values: [string]): string;
   encodeFunctionData(functionFragment: "gates", values: [string]): string;
-  encodeFunctionData(
-    functionFragment: "verifySolution",
-    values: [string, string]
-  ): string;
 
   decodeFunctionResult(functionFragment: "createGate", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "gates", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "verifySolution",
-    data: BytesLike
-  ): Result;
 
   events: {
     "CreateGate(address,string,address)": EventFragment;
@@ -91,12 +82,6 @@ export interface IUserGateFactory extends BaseContract {
     ): Promise<ContractTransaction>;
 
     gates(user: string, overrides?: CallOverrides): Promise<[string]>;
-
-    verifySolution(
-      user: string,
-      solution: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
   };
 
   createGate(
@@ -106,22 +91,10 @@ export interface IUserGateFactory extends BaseContract {
 
   gates(user: string, overrides?: CallOverrides): Promise<string>;
 
-  verifySolution(
-    user: string,
-    solution: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   callStatic: {
     createGate(username: string, overrides?: CallOverrides): Promise<string>;
 
     gates(user: string, overrides?: CallOverrides): Promise<string>;
-
-    verifySolution(
-      user: string,
-      solution: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
   };
 
   filters: {
@@ -144,12 +117,6 @@ export interface IUserGateFactory extends BaseContract {
     ): Promise<BigNumber>;
 
     gates(user: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    verifySolution(
-      user: string,
-      solution: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -160,12 +127,6 @@ export interface IUserGateFactory extends BaseContract {
 
     gates(
       user: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    verifySolution(
-      user: string,
-      solution: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

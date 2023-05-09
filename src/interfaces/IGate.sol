@@ -8,12 +8,8 @@ interface IGate {
 
     function username() external view returns (string memory username);
 
-    function solutionId(address solution) external view returns (uint256 id);
-
-    function deploy(bytes memory bytecode) external returns (address solution);
-
     function deployAndRun(
         bytes memory bytecode,
         bytes memory input
-    ) external returns (bytes memory output);
+    ) external returns (bytes memory output, uint256 gasUsed);
 }

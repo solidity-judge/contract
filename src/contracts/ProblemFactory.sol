@@ -4,6 +4,7 @@ pragma solidity >=0.8.0;
 import {SimpleChecker} from "./SimpleChecker.sol";
 import {Problem} from "./Problem.sol";
 import {IProblemFactory} from "../interfaces/IProblemFactory.sol";
+import {IUserGateFactory} from "../interfaces/IUserGateFactory.sol";
 import {BoringOwnableUpgradeable} from "../libraries/BoringOwnableUpgradable.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/proxy/utils/UUPSUpgradeable.sol";
@@ -30,6 +31,11 @@ contract ProblemFactory is
         address checker
     ) external returns (uint256 id, address problem) {
         if (checker == address(0)) checker = simpleChecker;
+
+        require(
+            IUserGateFactory(gateFactory).gates(msg.sender) != address(0),
+            "user not registered"
+        );
 
         id = ++problemCount;
         bytes memory data = abi.encodeWithSignature(

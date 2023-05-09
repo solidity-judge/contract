@@ -33,25 +33,6 @@ const _abi = [
         name: "bytecode",
         type: "bytes",
       },
-    ],
-    name: "deploy",
-    outputs: [
-      {
-        internalType: "address",
-        name: "solution",
-        type: "address",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "bytes",
-        name: "bytecode",
-        type: "bytes",
-      },
       {
         internalType: "bytes",
         name: "input",
@@ -65,27 +46,13 @@ const _abi = [
         name: "output",
         type: "bytes",
       },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "solution",
-        type: "address",
-      },
-    ],
-    name: "solutionId",
-    outputs: [
       {
         internalType: "uint256",
-        name: "id",
+        name: "gasUsed",
         type: "uint256",
       },
     ],
-    stateMutability: "view",
+    stateMutability: "nonpayable",
     type: "function",
   },
   {

@@ -24,28 +24,22 @@ import type {
 export interface IGateInterface extends utils.Interface {
   contractName: "IGate";
   functions: {
-    "deploy(bytes)": FunctionFragment;
     "deployAndRun(bytes,bytes)": FunctionFragment;
-    "solutionId(address)": FunctionFragment;
     "user()": FunctionFragment;
     "username()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: "deploy", values: [BytesLike]): string;
   encodeFunctionData(
     functionFragment: "deployAndRun",
     values: [BytesLike, BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: "solutionId", values: [string]): string;
   encodeFunctionData(functionFragment: "user", values?: undefined): string;
   encodeFunctionData(functionFragment: "username", values?: undefined): string;
 
-  decodeFunctionResult(functionFragment: "deploy", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "deployAndRun",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "solutionId", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "user", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "username", data: BytesLike): Result;
 
@@ -91,21 +85,11 @@ export interface IGate extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    deploy(
-      bytecode: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     deployAndRun(
       bytecode: BytesLike,
       input: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    solutionId(
-      solution: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { id: BigNumber }>;
 
     user(overrides?: CallOverrides): Promise<[string]>;
 
@@ -114,33 +98,22 @@ export interface IGate extends BaseContract {
     ): Promise<[string] & { username: string }>;
   };
 
-  deploy(
-    bytecode: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   deployAndRun(
     bytecode: BytesLike,
     input: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  solutionId(solution: string, overrides?: CallOverrides): Promise<BigNumber>;
-
   user(overrides?: CallOverrides): Promise<string>;
 
   username(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    deploy(bytecode: BytesLike, overrides?: CallOverrides): Promise<string>;
-
     deployAndRun(
       bytecode: BytesLike,
       input: BytesLike,
       overrides?: CallOverrides
-    ): Promise<string>;
-
-    solutionId(solution: string, overrides?: CallOverrides): Promise<BigNumber>;
+    ): Promise<[string, BigNumber] & { output: string; gasUsed: BigNumber }>;
 
     user(overrides?: CallOverrides): Promise<string>;
 
@@ -156,18 +129,11 @@ export interface IGate extends BaseContract {
   };
 
   estimateGas: {
-    deploy(
-      bytecode: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     deployAndRun(
       bytecode: BytesLike,
       input: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    solutionId(solution: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     user(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -175,20 +141,10 @@ export interface IGate extends BaseContract {
   };
 
   populateTransaction: {
-    deploy(
-      bytecode: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     deployAndRun(
       bytecode: BytesLike,
       input: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    solutionId(
-      solution: string,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     user(overrides?: CallOverrides): Promise<PopulatedTransaction>;

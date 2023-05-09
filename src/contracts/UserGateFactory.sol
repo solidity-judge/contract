@@ -40,15 +40,6 @@ contract UserGateFactory is
         emit CreateGate(user, username, gate);
     }
 
-    function verifySolution(
-        address user,
-        address solution
-    ) external view returns (bool) {
-        address gate = gates[user];
-        require(gate != address(0), "gate for user not created");
-        return IGate(gate).solutionId(solution) > 0;
-    }
-
     function initialize(address _implementation) external initializer {
         __BoringOwnable_init();
         implementation = _implementation;
