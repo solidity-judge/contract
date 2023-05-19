@@ -97,6 +97,25 @@ contract Problem is IProblemV2, TestManager {
         emit UpdateSolution(user, isPreDeadlineSolution, solutionAddr);
     }
 
+    function runPreDeadlineSolution(
+        address contestant,
+        bool isBeforeDeadline
+    ) external {
+        if (isBeforeDeadline) {
+            _runSolution(
+                contestant,
+                true,
+                contestants[contestant].solutionPreDeadline
+            );
+        } else {
+            _runSolution(
+                contestant,
+                false,
+                contestants[contestant].solutionPosDeadline
+            );
+        }
+    }
+
     function _runSolution(
         address contestant,
         bool isPreDeadlineSolution,

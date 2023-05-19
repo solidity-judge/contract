@@ -49,6 +49,7 @@ export interface ProblemInterface extends utils.Interface {
     "id()": FunctionFragment;
     "initialize(uint256,address,address,address)": FunctionFragment;
     "replaceTests((bytes,bytes32,uint224)[])": FunctionFragment;
+    "runPreDeadlineSolution(address,bool)": FunctionFragment;
     "submit(address,bool,bytes)": FunctionFragment;
     "testLength()": FunctionFragment;
     "testVersion()": FunctionFragment;
@@ -87,6 +88,10 @@ export interface ProblemInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "replaceTests",
     values: [TestCaseStruct[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "runPreDeadlineSolution",
+    values: [string, boolean]
   ): string;
   encodeFunctionData(
     functionFragment: "submit",
@@ -130,6 +135,10 @@ export interface ProblemInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "replaceTests",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "runPreDeadlineSolution",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "submit", data: BytesLike): Result;
@@ -282,6 +291,12 @@ export interface Problem extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    runPreDeadlineSolution(
+      contestant: string,
+      isBeforeDeadline: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     submit(
       user: string,
       isPreDeadlineSolution: boolean,
@@ -366,6 +381,12 @@ export interface Problem extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  runPreDeadlineSolution(
+    contestant: string,
+    isBeforeDeadline: boolean,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   submit(
     user: string,
     isPreDeadlineSolution: boolean,
@@ -444,6 +465,12 @@ export interface Problem extends BaseContract {
 
     replaceTests(
       newTests: TestCaseStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    runPreDeadlineSolution(
+      contestant: string,
+      isBeforeDeadline: boolean,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -557,6 +584,12 @@ export interface Problem extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    runPreDeadlineSolution(
+      contestant: string,
+      isBeforeDeadline: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     submit(
       user: string,
       isPreDeadlineSolution: boolean,
@@ -614,6 +647,12 @@ export interface Problem extends BaseContract {
 
     replaceTests(
       newTests: TestCaseStruct[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    runPreDeadlineSolution(
+      contestant: string,
+      isBeforeDeadline: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
