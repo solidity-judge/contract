@@ -20,6 +20,9 @@ export class ProblemSDK {
         this.problem = new Contract(problemConfig.address, IProblemAbi, signer) as Problem;
     }
 
+    /**
+     * @note For admin only
+     */
     async addTest(inputs: BigNumberish[], outputs: BigNumberish[], gasLimit: number) {
         const encodedInput = this.encodeData(inputs, this.problemConfig.inputFormat);
         const encodedOutput = ethers.utils.keccak256(this.encodeData(outputs, this.problemConfig.outputFormat));
@@ -31,20 +34,39 @@ export class ProblemSDK {
         });
     }
 
-    async deployAndRunExample(inputs: string[], bytecode: string): Promise<string[]> {
+    /**
+     * @note For participants to use this function to run example
+     */
+    async deployAndRunExample(inputs: string[], bytecode: string) {
         const userGate = await this.gateFactory.callStatic.gates(this.userAddr);
         const gate = new Contract(userGate, IGateAbi, this.signer) as Gate;
 
         const encodedInput = this.encodeData(inputs, this.problemConfig.inputFormat);
 
-        const encodedOutput = await gate.callStatic.deployAndRun(bytecode, encodedInput);
-        return this.decodeData(encodedOutput, this.problemConfig.outputFormat);
+        const { gasUsed, output: encodedOutput } = await gate.callStatic.deployAndRun(bytecode, encodedInput);
+        const output = this.decodeData(encodedOutput, this.problemConfig.outputFormat);
+        return {
+            output,
+            gasUsed: gasUsed.toNumber(),
+        };
     }
 
-    async submitSolution(bytecode: string) {
-        const userGate = await this.gateFactory.callStatic.gates(this.userAddr);
-        const gate = new Contract(userGate, IGateAbi, this.signer) as Gate;
-        return gate.deployAndSubmit(bytecode, this.problem.address);
+    async getContestantInfo() {
+        return this.problem.callStatic.getContestantInfo(this.userAddr);
+    }
+
+    /**
+     * Write function to submit solution (deploy a new contract)
+     */
+    async submit(bytecode: string, isPreDeadlineSolution = false) {
+        return this.problem.submit(this.userAddr, isPreDeadlineSolution, bytecode);
+    }
+
+    /**
+     * Send a transaction to judge submitted solution
+     */
+    async judge(isPreDeadlineSolution = false) {
+        return this.problem.runPreDeadlineSolution(this.userAddr, isPreDeadlineSolution);
     }
 
     async getTests(overrides: CallOverrides = {}): Promise<TestCase[]> {
