@@ -55,6 +55,10 @@ export class ProblemSDK {
         return this.problem.callStatic.getContestantInfo(this.userAddr);
     }
 
+    async getDeadline(): Promise<Date> {
+        return this.problem.callStatic.deadline().then((x) => new Date(x.toNumber() * 1000));
+    }
+
     /**
      * Write function to submit solution (deploy a new contract)
      */
