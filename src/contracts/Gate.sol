@@ -26,33 +26,13 @@ contract Gate is IGate, Initializable {
         username = _username;
     }
 
-    function deploy(
-        bytes memory bytecode
-    ) external onlyUser returns (address solution) {
-        return _deploy(bytecode);
-    }
-
-    function deployAndSubmit(
-        bytes memory bytecode,
-        address problem
-    ) external onlyUser {
-        address solution = _deploy(bytecode);
-        IProblem(problem).gateUpdateAndRunSolution(solution);
-    }
-
     function deployAndRun(
         bytes memory bytecode,
         bytes memory input
-    ) external onlyUser returns (bytes memory output) {
-        address solution = _deploy(bytecode);
+    ) external returns (bytes memory output, uint256 gasUsed) {
+        address solution = Create2.deploy(0, bytes32(0), bytecode);
+        gasUsed = gasleft();
         output = ISolution(solution).execute(input);
-    }
-
-    function _deploy(bytes memory bytecode) internal returns (address addr) {
-        ++nonce;
-        addr = Create2.deploy(0, bytes32(nonce), bytecode);
-        solutionId[addr] = nonce;
-
-        emit Deployment(nonce, addr);
+        gasUsed -= gasleft();
     }
 }

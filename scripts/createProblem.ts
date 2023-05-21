@@ -9,8 +9,10 @@ import { zeroAddress } from '@nomicfoundation/ethereumjs-util';
 async function main() {
     const [deployer]: SignerWithAddress[] = await hre.ethers.getSigners();
     const env = await prepEnv(deployer);
+    const problemImplementation = await deploy<Problem>(env, 'Problem', []);
 
-    await env.problemFactory.createProblem(zeroAddress(), env.nonceManager.nonce());
+    await env.problemFactory.upgradeBeacon(problemImplementation.address);
+    // await env.problemFactory.createProblem(zeroAddress(), env.nonceManager.nonce());
 }
 
 main().then(() => {

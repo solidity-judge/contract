@@ -38,33 +38,27 @@ export interface ProblemInterface extends utils.Interface {
   contractName: "Problem";
   functions: {
     "MAX_OUTPUT_SIZE()": FunctionFragment;
-    "_updateSolution(address,address)": FunctionFragment;
     "addTest((bytes,bytes32,uint224))": FunctionFragment;
     "author()": FunctionFragment;
     "checker()": FunctionFragment;
     "contestants(address)": FunctionFragment;
+    "deadline()": FunctionFragment;
+    "declareSolutionHash(bytes32)": FunctionFragment;
     "gateFactory()": FunctionFragment;
-    "gateUpdateAndRunSolution(address)": FunctionFragment;
     "getContestantInfo(address)": FunctionFragment;
     "id()": FunctionFragment;
     "initialize(uint256,address,address,address)": FunctionFragment;
-    "modifyChecker(address)": FunctionFragment;
     "replaceTests((bytes,bytes32,uint224)[])": FunctionFragment;
-    "runSolution(address)": FunctionFragment;
+    "runPreDeadlineSolution(address,bool)": FunctionFragment;
+    "submit(address,bool,bytes)": FunctionFragment;
     "testLength()": FunctionFragment;
     "testVersion()": FunctionFragment;
     "tests(uint256)": FunctionFragment;
-    "updateAndRunSolution(address)": FunctionFragment;
-    "updateSolution(address)": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "MAX_OUTPUT_SIZE",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "_updateSolution",
-    values: [string, string]
   ): string;
   encodeFunctionData(
     functionFragment: "addTest",
@@ -73,13 +67,14 @@ export interface ProblemInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "author", values?: undefined): string;
   encodeFunctionData(functionFragment: "checker", values?: undefined): string;
   encodeFunctionData(functionFragment: "contestants", values: [string]): string;
+  encodeFunctionData(functionFragment: "deadline", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "declareSolutionHash",
+    values: [BytesLike]
+  ): string;
   encodeFunctionData(
     functionFragment: "gateFactory",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "gateUpdateAndRunSolution",
-    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "getContestantInfo",
@@ -91,14 +86,17 @@ export interface ProblemInterface extends utils.Interface {
     values: [BigNumberish, string, string, string]
   ): string;
   encodeFunctionData(
-    functionFragment: "modifyChecker",
-    values: [string]
-  ): string;
-  encodeFunctionData(
     functionFragment: "replaceTests",
     values: [TestCaseStruct[]]
   ): string;
-  encodeFunctionData(functionFragment: "runSolution", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "runPreDeadlineSolution",
+    values: [string, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "submit",
+    values: [string, boolean, BytesLike]
+  ): string;
   encodeFunctionData(
     functionFragment: "testLength",
     values?: undefined
@@ -108,21 +106,9 @@ export interface ProblemInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "tests", values: [BigNumberish]): string;
-  encodeFunctionData(
-    functionFragment: "updateAndRunSolution",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updateSolution",
-    values: [string]
-  ): string;
 
   decodeFunctionResult(
     functionFragment: "MAX_OUTPUT_SIZE",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "_updateSolution",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "addTest", data: BytesLike): Result;
@@ -132,12 +118,13 @@ export interface ProblemInterface extends utils.Interface {
     functionFragment: "contestants",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "deadline", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "gateFactory",
+    functionFragment: "declareSolutionHash",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "gateUpdateAndRunSolution",
+    functionFragment: "gateFactory",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -147,44 +134,43 @@ export interface ProblemInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "id", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "modifyChecker",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "replaceTests",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "runSolution",
+    functionFragment: "runPreDeadlineSolution",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "submit", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "testLength", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "testVersion",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "tests", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "updateAndRunSolution",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateSolution",
-    data: BytesLike
-  ): Result;
 
   events: {
+    "DeclareSolutionHash(address,bytes32)": EventFragment;
     "Initialized(uint8)": EventFragment;
     "NewTestVersion(uint256,tuple[])": EventFragment;
-    "RunSolution(address,uint256,uint256,uint8[])": EventFragment;
-    "UpdateSolution(address,address)": EventFragment;
+    "RunSolution(address,uint256,bool,uint8[])": EventFragment;
+    "UpdateSolution(address,bool,address)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "DeclareSolutionHash"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Initialized"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NewTestVersion"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RunSolution"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "UpdateSolution"): EventFragment;
 }
+
+export type DeclareSolutionHashEvent = TypedEvent<
+  [string, string],
+  { contestant: string; solutionHash: string }
+>;
+
+export type DeclareSolutionHashEventFilter =
+  TypedEventFilter<DeclareSolutionHashEvent>;
 
 export type InitializedEvent = TypedEvent<[number], { version: number }>;
 
@@ -198,11 +184,11 @@ export type NewTestVersionEvent = TypedEvent<
 export type NewTestVersionEventFilter = TypedEventFilter<NewTestVersionEvent>;
 
 export type RunSolutionEvent = TypedEvent<
-  [string, BigNumber, BigNumber, number[]],
+  [string, BigNumber, boolean, number[]],
   {
     contestant: string;
-    version: BigNumber;
     point: BigNumber;
+    isPreDeadlineSolution: boolean;
     verdicts: number[];
   }
 >;
@@ -210,8 +196,8 @@ export type RunSolutionEvent = TypedEvent<
 export type RunSolutionEventFilter = TypedEventFilter<RunSolutionEvent>;
 
 export type UpdateSolutionEvent = TypedEvent<
-  [string, string],
-  { contestant: string; solution: string }
+  [string, boolean, string],
+  { contestant: string; isPreDeadlineSolution: boolean; solution: string }
 >;
 
 export type UpdateSolutionEventFilter = TypedEventFilter<UpdateSolutionEvent>;
@@ -246,12 +232,6 @@ export interface Problem extends BaseContract {
   functions: {
     MAX_OUTPUT_SIZE(overrides?: CallOverrides): Promise<[number]>;
 
-    _updateSolution(
-      user: string,
-      solution: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     addTest(
       test: TestCaseStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -265,28 +245,34 @@ export interface Problem extends BaseContract {
       arg0: string,
       overrides?: CallOverrides
     ): Promise<
-      [string, number, number] & {
-        solution: string;
-        point: number;
-        version: number;
+      [string, string, string, number, number] & {
+        solutionHash: string;
+        solutionPreDeadline: string;
+        solutionPosDeadline: string;
+        pointPreDeadline: number;
+        pointPosDeadline: number;
       }
     >;
 
-    gateFactory(overrides?: CallOverrides): Promise<[string]>;
+    deadline(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    gateUpdateAndRunSolution(
-      solution: string,
+    declareSolutionHash(
+      solutionHash: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    gateFactory(overrides?: CallOverrides): Promise<[string]>;
 
     getContestantInfo(
       contestant: string,
       overrides?: CallOverrides
     ): Promise<
-      [string, number, boolean] & {
-        solution: string;
-        point: number;
-        isPointUpToDate: boolean;
+      [string, string, string, number, number] & {
+        solutionHash: string;
+        solutionPreDeadline: string;
+        solutionPosDeadline: string;
+        pointPreDeadline: number;
+        pointPosDeadline: number;
       }
     >;
 
@@ -300,18 +286,21 @@ export interface Problem extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    modifyChecker(
-      newChecker: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     replaceTests(
       newTests: TestCaseStruct[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    runSolution(
+    runPreDeadlineSolution(
       contestant: string,
+      isBeforeDeadline: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    submit(
+      user: string,
+      isPreDeadlineSolution: boolean,
+      solutionBytecode: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -329,25 +318,9 @@ export interface Problem extends BaseContract {
         gasLimit: BigNumber;
       }
     >;
-
-    updateAndRunSolution(
-      solution: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    updateSolution(
-      solution: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
   };
 
   MAX_OUTPUT_SIZE(overrides?: CallOverrides): Promise<number>;
-
-  _updateSolution(
-    user: string,
-    solution: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
 
   addTest(
     test: TestCaseStruct,
@@ -362,28 +335,34 @@ export interface Problem extends BaseContract {
     arg0: string,
     overrides?: CallOverrides
   ): Promise<
-    [string, number, number] & {
-      solution: string;
-      point: number;
-      version: number;
+    [string, string, string, number, number] & {
+      solutionHash: string;
+      solutionPreDeadline: string;
+      solutionPosDeadline: string;
+      pointPreDeadline: number;
+      pointPosDeadline: number;
     }
   >;
 
-  gateFactory(overrides?: CallOverrides): Promise<string>;
+  deadline(overrides?: CallOverrides): Promise<BigNumber>;
 
-  gateUpdateAndRunSolution(
-    solution: string,
+  declareSolutionHash(
+    solutionHash: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  gateFactory(overrides?: CallOverrides): Promise<string>;
 
   getContestantInfo(
     contestant: string,
     overrides?: CallOverrides
   ): Promise<
-    [string, number, boolean] & {
-      solution: string;
-      point: number;
-      isPointUpToDate: boolean;
+    [string, string, string, number, number] & {
+      solutionHash: string;
+      solutionPreDeadline: string;
+      solutionPosDeadline: string;
+      pointPreDeadline: number;
+      pointPosDeadline: number;
     }
   >;
 
@@ -397,18 +376,21 @@ export interface Problem extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  modifyChecker(
-    newChecker: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   replaceTests(
     newTests: TestCaseStruct[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  runSolution(
+  runPreDeadlineSolution(
     contestant: string,
+    isBeforeDeadline: boolean,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  submit(
+    user: string,
+    isPreDeadlineSolution: boolean,
+    solutionBytecode: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -427,24 +409,8 @@ export interface Problem extends BaseContract {
     }
   >;
 
-  updateAndRunSolution(
-    solution: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  updateSolution(
-    solution: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   callStatic: {
     MAX_OUTPUT_SIZE(overrides?: CallOverrides): Promise<number>;
-
-    _updateSolution(
-      user: string,
-      solution: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     addTest(test: TestCaseStruct, overrides?: CallOverrides): Promise<void>;
 
@@ -456,28 +422,34 @@ export interface Problem extends BaseContract {
       arg0: string,
       overrides?: CallOverrides
     ): Promise<
-      [string, number, number] & {
-        solution: string;
-        point: number;
-        version: number;
+      [string, string, string, number, number] & {
+        solutionHash: string;
+        solutionPreDeadline: string;
+        solutionPosDeadline: string;
+        pointPreDeadline: number;
+        pointPosDeadline: number;
       }
     >;
 
-    gateFactory(overrides?: CallOverrides): Promise<string>;
+    deadline(overrides?: CallOverrides): Promise<BigNumber>;
 
-    gateUpdateAndRunSolution(
-      solution: string,
+    declareSolutionHash(
+      solutionHash: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    gateFactory(overrides?: CallOverrides): Promise<string>;
 
     getContestantInfo(
       contestant: string,
       overrides?: CallOverrides
     ): Promise<
-      [string, number, boolean] & {
-        solution: string;
-        point: number;
-        isPointUpToDate: boolean;
+      [string, string, string, number, number] & {
+        solutionHash: string;
+        solutionPreDeadline: string;
+        solutionPosDeadline: string;
+        pointPreDeadline: number;
+        pointPosDeadline: number;
       }
     >;
 
@@ -491,14 +463,23 @@ export interface Problem extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    modifyChecker(newChecker: string, overrides?: CallOverrides): Promise<void>;
-
     replaceTests(
       newTests: TestCaseStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    runSolution(contestant: string, overrides?: CallOverrides): Promise<void>;
+    runPreDeadlineSolution(
+      contestant: string,
+      isBeforeDeadline: boolean,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    submit(
+      user: string,
+      isPreDeadlineSolution: boolean,
+      solutionBytecode: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     testLength(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -514,16 +495,18 @@ export interface Problem extends BaseContract {
         gasLimit: BigNumber;
       }
     >;
-
-    updateAndRunSolution(
-      solution: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    updateSolution(solution: string, overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {
+    "DeclareSolutionHash(address,bytes32)"(
+      contestant?: null,
+      solutionHash?: null
+    ): DeclareSolutionHashEventFilter;
+    DeclareSolutionHash(
+      contestant?: null,
+      solutionHash?: null
+    ): DeclareSolutionHashEventFilter;
+
     "Initialized(uint8)"(version?: null): InitializedEventFilter;
     Initialized(version?: null): InitializedEventFilter;
 
@@ -533,37 +516,33 @@ export interface Problem extends BaseContract {
     ): NewTestVersionEventFilter;
     NewTestVersion(version?: null, tests?: null): NewTestVersionEventFilter;
 
-    "RunSolution(address,uint256,uint256,uint8[])"(
+    "RunSolution(address,uint256,bool,uint8[])"(
       contestant?: null,
-      version?: null,
       point?: null,
+      isPreDeadlineSolution?: null,
       verdicts?: null
     ): RunSolutionEventFilter;
     RunSolution(
       contestant?: null,
-      version?: null,
       point?: null,
+      isPreDeadlineSolution?: null,
       verdicts?: null
     ): RunSolutionEventFilter;
 
-    "UpdateSolution(address,address)"(
+    "UpdateSolution(address,bool,address)"(
       contestant?: null,
+      isPreDeadlineSolution?: null,
       solution?: null
     ): UpdateSolutionEventFilter;
     UpdateSolution(
       contestant?: null,
+      isPreDeadlineSolution?: null,
       solution?: null
     ): UpdateSolutionEventFilter;
   };
 
   estimateGas: {
     MAX_OUTPUT_SIZE(overrides?: CallOverrides): Promise<BigNumber>;
-
-    _updateSolution(
-      user: string,
-      solution: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
 
     addTest(
       test: TestCaseStruct,
@@ -576,12 +555,14 @@ export interface Problem extends BaseContract {
 
     contestants(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    gateFactory(overrides?: CallOverrides): Promise<BigNumber>;
+    deadline(overrides?: CallOverrides): Promise<BigNumber>;
 
-    gateUpdateAndRunSolution(
-      solution: string,
+    declareSolutionHash(
+      solutionHash: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    gateFactory(overrides?: CallOverrides): Promise<BigNumber>;
 
     getContestantInfo(
       contestant: string,
@@ -598,18 +579,21 @@ export interface Problem extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    modifyChecker(
-      newChecker: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     replaceTests(
       newTests: TestCaseStruct[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    runSolution(
+    runPreDeadlineSolution(
       contestant: string,
+      isBeforeDeadline: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    submit(
+      user: string,
+      isPreDeadlineSolution: boolean,
+      solutionBytecode: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -618,26 +602,10 @@ export interface Problem extends BaseContract {
     testVersion(overrides?: CallOverrides): Promise<BigNumber>;
 
     tests(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-    updateAndRunSolution(
-      solution: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    updateSolution(
-      solution: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     MAX_OUTPUT_SIZE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    _updateSolution(
-      user: string,
-      solution: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
 
     addTest(
       test: TestCaseStruct,
@@ -653,12 +621,14 @@ export interface Problem extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    gateFactory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    deadline(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    gateUpdateAndRunSolution(
-      solution: string,
+    declareSolutionHash(
+      solutionHash: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    gateFactory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getContestantInfo(
       contestant: string,
@@ -675,18 +645,21 @@ export interface Problem extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    modifyChecker(
-      newChecker: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     replaceTests(
       newTests: TestCaseStruct[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    runSolution(
+    runPreDeadlineSolution(
       contestant: string,
+      isBeforeDeadline: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    submit(
+      user: string,
+      isPreDeadlineSolution: boolean,
+      solutionBytecode: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -697,16 +670,6 @@ export interface Problem extends BaseContract {
     tests(
       arg0: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    updateAndRunSolution(
-      solution: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    updateSolution(
-      solution: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -7,9 +7,4 @@ interface IUserGateFactory {
     function gates(address user) external view returns (address);
 
     function createGate(string memory username) external returns (address gate);
-
-    function verifySolution(
-        address user,
-        address solution
-    ) external view returns (bool);
 }

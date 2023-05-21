@@ -24,9 +24,7 @@ import type {
 export interface GateInterface extends utils.Interface {
   contractName: "Gate";
   functions: {
-    "deploy(bytes)": FunctionFragment;
     "deployAndRun(bytes,bytes)": FunctionFragment;
-    "deployAndSubmit(bytes,address)": FunctionFragment;
     "initialize(address,string)": FunctionFragment;
     "nonce()": FunctionFragment;
     "solutionId(address)": FunctionFragment;
@@ -34,14 +32,9 @@ export interface GateInterface extends utils.Interface {
     "username()": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: "deploy", values: [BytesLike]): string;
   encodeFunctionData(
     functionFragment: "deployAndRun",
     values: [BytesLike, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "deployAndSubmit",
-    values: [BytesLike, string]
   ): string;
   encodeFunctionData(
     functionFragment: "initialize",
@@ -52,13 +45,8 @@ export interface GateInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "user", values?: undefined): string;
   encodeFunctionData(functionFragment: "username", values?: undefined): string;
 
-  decodeFunctionResult(functionFragment: "deploy", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "deployAndRun",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "deployAndSubmit",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
@@ -115,20 +103,9 @@ export interface Gate extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    deploy(
-      bytecode: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     deployAndRun(
       bytecode: BytesLike,
       input: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    deployAndSubmit(
-      bytecode: BytesLike,
-      problem: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -147,20 +124,9 @@ export interface Gate extends BaseContract {
     username(overrides?: CallOverrides): Promise<[string]>;
   };
 
-  deploy(
-    bytecode: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   deployAndRun(
     bytecode: BytesLike,
     input: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  deployAndSubmit(
-    bytecode: BytesLike,
-    problem: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -179,19 +145,11 @@ export interface Gate extends BaseContract {
   username(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    deploy(bytecode: BytesLike, overrides?: CallOverrides): Promise<string>;
-
     deployAndRun(
       bytecode: BytesLike,
       input: BytesLike,
       overrides?: CallOverrides
-    ): Promise<string>;
-
-    deployAndSubmit(
-      bytecode: BytesLike,
-      problem: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<[string, BigNumber] & { output: string; gasUsed: BigNumber }>;
 
     initialize(
       _user: string,
@@ -220,20 +178,9 @@ export interface Gate extends BaseContract {
   };
 
   estimateGas: {
-    deploy(
-      bytecode: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     deployAndRun(
       bytecode: BytesLike,
       input: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    deployAndSubmit(
-      bytecode: BytesLike,
-      problem: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -253,20 +200,9 @@ export interface Gate extends BaseContract {
   };
 
   populateTransaction: {
-    deploy(
-      bytecode: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     deployAndRun(
       bytecode: BytesLike,
       input: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    deployAndSubmit(
-      bytecode: BytesLike,
-      problem: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

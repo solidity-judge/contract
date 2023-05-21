@@ -37,7 +37,6 @@ export interface UserGateFactoryInterface extends utils.Interface {
     "upgradeBeacon(address)": FunctionFragment;
     "upgradeTo(address)": FunctionFragment;
     "upgradeToAndCall(address,bytes)": FunctionFragment;
-    "verifySolution(address,address)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -73,10 +72,6 @@ export interface UserGateFactoryInterface extends utils.Interface {
     functionFragment: "upgradeToAndCall",
     values: [string, BytesLike]
   ): string;
-  encodeFunctionData(
-    functionFragment: "verifySolution",
-    values: [string, string]
-  ): string;
 
   decodeFunctionResult(
     functionFragment: "claimOwnership",
@@ -109,10 +104,6 @@ export interface UserGateFactoryInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "upgradeTo", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "upgradeToAndCall",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "verifySolution",
     data: BytesLike
   ): Result;
 
@@ -241,12 +232,6 @@ export interface UserGateFactory extends BaseContract {
       data: BytesLike,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    verifySolution(
-      user: string,
-      solution: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
   };
 
   claimOwnership(
@@ -296,12 +281,6 @@ export interface UserGateFactory extends BaseContract {
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  verifySolution(
-    user: string,
-    solution: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   callStatic: {
     claimOwnership(overrides?: CallOverrides): Promise<void>;
 
@@ -344,12 +323,6 @@ export interface UserGateFactory extends BaseContract {
       data: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    verifySolution(
-      user: string,
-      solution: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
   };
 
   filters: {
@@ -441,12 +414,6 @@ export interface UserGateFactory extends BaseContract {
       data: BytesLike,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    verifySolution(
-      user: string,
-      solution: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -498,12 +465,6 @@ export interface UserGateFactory extends BaseContract {
       newImplementation: string,
       data: BytesLike,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    verifySolution(
-      user: string,
-      solution: string,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }
