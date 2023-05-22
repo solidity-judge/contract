@@ -27,6 +27,8 @@ interface IProblemV2 {
 
     event DeclareSolutionHash(address contestant, bytes32 solutionHash);
 
+    event DeadlineUpdated(uint256 deadline);
+
     function getContestantInfo(
         address contestant
     )
