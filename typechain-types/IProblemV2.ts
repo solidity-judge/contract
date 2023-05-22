@@ -53,15 +53,24 @@ export interface IProblemV2Interface extends utils.Interface {
   decodeFunctionResult(functionFragment: "submit", data: BytesLike): Result;
 
   events: {
+    "DeadlineUpdated(uint256)": EventFragment;
     "DeclareSolutionHash(address,bytes32)": EventFragment;
     "RunSolution(address,uint256,bool,uint8[])": EventFragment;
     "UpdateSolution(address,bool,address)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "DeadlineUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "DeclareSolutionHash"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RunSolution"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "UpdateSolution"): EventFragment;
 }
+
+export type DeadlineUpdatedEvent = TypedEvent<
+  [BigNumber],
+  { deadline: BigNumber }
+>;
+
+export type DeadlineUpdatedEventFilter = TypedEventFilter<DeadlineUpdatedEvent>;
 
 export type DeclareSolutionHashEvent = TypedEvent<
   [string, string],
@@ -197,6 +206,9 @@ export interface IProblemV2 extends BaseContract {
   };
 
   filters: {
+    "DeadlineUpdated(uint256)"(deadline?: null): DeadlineUpdatedEventFilter;
+    DeadlineUpdated(deadline?: null): DeadlineUpdatedEventFilter;
+
     "DeclareSolutionHash(address,bytes32)"(
       contestant?: null,
       solutionHash?: null
