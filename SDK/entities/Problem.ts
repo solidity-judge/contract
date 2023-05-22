@@ -35,6 +35,13 @@ export class ProblemSDK {
     }
 
     /**
+     * @note For admin only
+     */
+    async setDeadline(deadline: Date) {
+        return this.problem.setDeadline(Math.trunc(deadline.getTime() / 1000));
+    }
+
+    /**
      * @note For participants to use this function to run example
      */
     async deployAndRunExample(inputs: string[], bytecode: string) {
@@ -62,15 +69,8 @@ export class ProblemSDK {
     /**
      * Write function to submit solution (deploy a new contract)
      */
-    async submit(bytecode: string, isPreDeadlineSolution = false) {
-        return this.problem.submit(this.userAddr, isPreDeadlineSolution, bytecode);
-    }
-
-    /**
-     * Send a transaction to judge submitted solution
-     */
-    async judge(isPreDeadlineSolution = false) {
-        return this.problem.runPreDeadlineSolution(this.userAddr, isPreDeadlineSolution);
+    async submitAndRunSolution(bytecode: string, isPreDeadlineSolution = false) {
+        return this.problem.submitAndRunSolution(this.userAddr, isPreDeadlineSolution, bytecode);
     }
 
     async getTests(overrides: CallOverrides = {}): Promise<TestCase[]> {
