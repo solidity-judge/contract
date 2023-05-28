@@ -33,6 +33,14 @@ export class ProblemSDK {
             gasLimit: gasLimit,
         });
     }
+    async replaceTests(tests: (TestCase & { output: string[] })[]) {
+        const encodedTests = tests.map((test) => ({
+            gasLimit: test.gasLimit,
+            input: this.encodeData(test.input, this.problemConfig.inputFormat),
+            output: ethers.utils.keccak256(this.encodeData(test.output, this.problemConfig.outputFormat)),
+        }));
+        return this.problem.replaceTests(encodedTests);
+    }
 
     /**
      * @note For admin only
@@ -95,7 +103,8 @@ export class ProblemSDK {
                 const raw: SubmissionResultRaw = this.problem.interface.parseLog(log)['args'] as any;
                 const result: Omit<SubmissionResult, 'tests'> = {
                     contestant: raw.contestant,
-                    version: raw.version.toNumber(),
+                    version: 0,
+                    isPreDeadlineSolution: raw.isPreDeadlineSolution,
                     point: raw.point.toNumber() / 100,
                     verdicts: raw.verdicts,
                 };
