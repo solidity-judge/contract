@@ -66,6 +66,10 @@ export class ProblemSDK {
         };
     }
 
+    async declareSolutionHash(hashedSolution: string) {
+        return this.problem.declareSolutionHash(hashedSolution);
+    }
+
     async getContestantInfo() {
         return this.problem.callStatic.getContestantInfo(this.userAddr);
     }
