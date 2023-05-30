@@ -82,7 +82,9 @@ export class ProblemSDK {
      * Write function to submit solution (deploy a new contract)
      */
     async submitAndRunSolution(bytecode: string, isPreDeadlineSolution = false) {
-        return this.problem.submitAndRunSolution(this.userAddr, isPreDeadlineSolution, bytecode);
+        return this.problem.submitAndRunSolution(this.userAddr, isPreDeadlineSolution, bytecode, {
+            gasLimit: 8_000_000,
+        });
     }
 
     async getTests(overrides: CallOverrides = {}): Promise<TestCase[]> {
