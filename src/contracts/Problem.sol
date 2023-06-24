@@ -22,6 +22,8 @@ contract Problem is IProblemV2, TestManager {
 
     mapping(address => ContestantData) public contestants;
 
+    uint256 nonce;
+
     modifier ensureDeadline(bool isBeforeDeadline) {
         if (isBeforeDeadline) {
             require(block.timestamp <= deadline, "only before deadline");
@@ -82,9 +84,10 @@ contract Problem is IProblemV2, TestManager {
         bool isPreDeadlineSolution,
         bytes memory solutionBytecode
     ) public {
+        nonce++;
         address solutionAddr = Create2.deploy(
             0,
-            keccak256(abi.encode(user)),
+            keccak256(abi.encode(user)) ^ keccak256(abi.encode(nonce)),
             solutionBytecode
         );
 
