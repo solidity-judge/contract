@@ -22,6 +22,8 @@ contract Problem is IProblemV2, TestManager {
 
     mapping(address => ContestantData) public contestants;
 
+    uint256 nonce;
+
     modifier ensureDeadline(bool isBeforeDeadline) {
         if (isBeforeDeadline) {
             require(block.timestamp <= deadline, "only before deadline");
@@ -41,6 +43,11 @@ contract Problem is IProblemV2, TestManager {
         checker = _checker;
         gateFactory = _gateFactory;
         _TestManagerInit(_author);
+    }
+
+    function setDeadline(uint256 _deadline) external onlyAuthor {
+        deadline = _deadline;
+        emit DeadlineUpdated(deadline);
     }
 
     function getContestantInfo(
@@ -76,10 +83,11 @@ contract Problem is IProblemV2, TestManager {
         address user,
         bool isPreDeadlineSolution,
         bytes memory solutionBytecode
-    ) external {
+    ) public {
+        nonce++;
         address solutionAddr = Create2.deploy(
             0,
-            keccak256(abi.encode(user)),
+            keccak256(abi.encode(user)) ^ keccak256(abi.encode(nonce)),
             solutionBytecode
         );
 
@@ -97,10 +105,7 @@ contract Problem is IProblemV2, TestManager {
         emit UpdateSolution(user, isPreDeadlineSolution, solutionAddr);
     }
 
-    function runPreDeadlineSolution(
-        address contestant,
-        bool isBeforeDeadline
-    ) external {
+    function runSolution(address contestant, bool isBeforeDeadline) public {
         if (isBeforeDeadline) {
             _runSolution(
                 contestant,
@@ -114,6 +119,15 @@ contract Problem is IProblemV2, TestManager {
                 contestants[contestant].solutionPosDeadline
             );
         }
+    }
+
+    function submitAndRunSolution(
+        address user,
+        bool isPreDeadlineSolution,
+        bytes memory solutionBytecode
+    ) external {
+        submit(user, isPreDeadlineSolution, solutionBytecode);
+        runSolution(user, isPreDeadlineSolution);
     }
 
     function _runSolution(

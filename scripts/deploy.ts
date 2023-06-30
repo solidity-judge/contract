@@ -13,14 +13,20 @@ async function main() {
     await env.nonceManager.prepNonce();
 
     const gateImplementation = await deploy<Gate>(env, 'Gate', []);
-    const userGateFactory = await deployProxy<UserGateFactory>(env, 'UserGateFactory', [], [gateImplementation.address]);
+    const userGateFactory = await deployProxy<UserGateFactory>(
+        env,
+        'UserGateFactory',
+        [],
+        [gateImplementation.address]
+    );
 
     const problemImplementation = await deploy<Problem>(env, 'Problem', []);
-    const problemFactory = await deployProxy<ProblemFactory>(env, 'ProblemFactory', [userGateFactory.address], [problemImplementation.address]);
-
-
-
-
+    const problemFactory = await deployProxy<ProblemFactory>(
+        env,
+        'ProblemFactory',
+        [userGateFactory.address],
+        [problemImplementation.address]
+    );
 }
 
 main().then(() => {

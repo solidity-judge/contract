@@ -49,8 +49,10 @@ export interface ProblemInterface extends utils.Interface {
     "id()": FunctionFragment;
     "initialize(uint256,address,address,address)": FunctionFragment;
     "replaceTests((bytes,bytes32,uint224)[])": FunctionFragment;
-    "runPreDeadlineSolution(address,bool)": FunctionFragment;
+    "runSolution(address,bool)": FunctionFragment;
+    "setDeadline(uint256)": FunctionFragment;
     "submit(address,bool,bytes)": FunctionFragment;
+    "submitAndRunSolution(address,bool,bytes)": FunctionFragment;
     "testLength()": FunctionFragment;
     "testVersion()": FunctionFragment;
     "tests(uint256)": FunctionFragment;
@@ -90,11 +92,19 @@ export interface ProblemInterface extends utils.Interface {
     values: [TestCaseStruct[]]
   ): string;
   encodeFunctionData(
-    functionFragment: "runPreDeadlineSolution",
+    functionFragment: "runSolution",
     values: [string, boolean]
   ): string;
   encodeFunctionData(
+    functionFragment: "setDeadline",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "submit",
+    values: [string, boolean, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "submitAndRunSolution",
     values: [string, boolean, BytesLike]
   ): string;
   encodeFunctionData(
@@ -138,10 +148,18 @@ export interface ProblemInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "runPreDeadlineSolution",
+    functionFragment: "runSolution",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setDeadline",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "submit", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "submitAndRunSolution",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "testLength", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "testVersion",
@@ -150,6 +168,7 @@ export interface ProblemInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "tests", data: BytesLike): Result;
 
   events: {
+    "DeadlineUpdated(uint256)": EventFragment;
     "DeclareSolutionHash(address,bytes32)": EventFragment;
     "Initialized(uint8)": EventFragment;
     "NewTestVersion(uint256,tuple[])": EventFragment;
@@ -157,12 +176,20 @@ export interface ProblemInterface extends utils.Interface {
     "UpdateSolution(address,bool,address)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "DeadlineUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "DeclareSolutionHash"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Initialized"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NewTestVersion"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RunSolution"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "UpdateSolution"): EventFragment;
 }
+
+export type DeadlineUpdatedEvent = TypedEvent<
+  [BigNumber],
+  { deadline: BigNumber }
+>;
+
+export type DeadlineUpdatedEventFilter = TypedEventFilter<DeadlineUpdatedEvent>;
 
 export type DeclareSolutionHashEvent = TypedEvent<
   [string, string],
@@ -291,13 +318,25 @@ export interface Problem extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    runPreDeadlineSolution(
+    runSolution(
       contestant: string,
       isBeforeDeadline: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    setDeadline(
+      _deadline: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     submit(
+      user: string,
+      isPreDeadlineSolution: boolean,
+      solutionBytecode: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    submitAndRunSolution(
       user: string,
       isPreDeadlineSolution: boolean,
       solutionBytecode: BytesLike,
@@ -381,13 +420,25 @@ export interface Problem extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  runPreDeadlineSolution(
+  runSolution(
     contestant: string,
     isBeforeDeadline: boolean,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  setDeadline(
+    _deadline: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   submit(
+    user: string,
+    isPreDeadlineSolution: boolean,
+    solutionBytecode: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  submitAndRunSolution(
     user: string,
     isPreDeadlineSolution: boolean,
     solutionBytecode: BytesLike,
@@ -468,13 +519,25 @@ export interface Problem extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    runPreDeadlineSolution(
+    runSolution(
       contestant: string,
       isBeforeDeadline: boolean,
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setDeadline(
+      _deadline: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     submit(
+      user: string,
+      isPreDeadlineSolution: boolean,
+      solutionBytecode: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    submitAndRunSolution(
       user: string,
       isPreDeadlineSolution: boolean,
       solutionBytecode: BytesLike,
@@ -498,6 +561,9 @@ export interface Problem extends BaseContract {
   };
 
   filters: {
+    "DeadlineUpdated(uint256)"(deadline?: null): DeadlineUpdatedEventFilter;
+    DeadlineUpdated(deadline?: null): DeadlineUpdatedEventFilter;
+
     "DeclareSolutionHash(address,bytes32)"(
       contestant?: null,
       solutionHash?: null
@@ -584,13 +650,25 @@ export interface Problem extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    runPreDeadlineSolution(
+    runSolution(
       contestant: string,
       isBeforeDeadline: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    setDeadline(
+      _deadline: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     submit(
+      user: string,
+      isPreDeadlineSolution: boolean,
+      solutionBytecode: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    submitAndRunSolution(
       user: string,
       isPreDeadlineSolution: boolean,
       solutionBytecode: BytesLike,
@@ -650,13 +728,25 @@ export interface Problem extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    runPreDeadlineSolution(
+    runSolution(
       contestant: string,
       isBeforeDeadline: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    setDeadline(
+      _deadline: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     submit(
+      user: string,
+      isPreDeadlineSolution: boolean,
+      solutionBytecode: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    submitAndRunSolution(
       user: string,
       isPreDeadlineSolution: boolean,
       solutionBytecode: BytesLike,

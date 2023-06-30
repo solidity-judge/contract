@@ -4,7 +4,7 @@ export type RpcSigner = ethers.Signer;
 
 export type SubmissionResultRaw = {
     contestant: string;
-    version: BigNumber;
+    isPreDeadlineSolution: boolean;
     point: BigNumber;
     verdicts: number[];
 };
@@ -23,6 +23,7 @@ export type TestCase = {
 export type SubmissionResult = {
     contestant: string;
     version: number;
+    isPreDeadlineSolution: boolean;
     point: number;
     verdicts: TestCaseVerdict[];
     tests: TestCase[];

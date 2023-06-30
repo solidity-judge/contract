@@ -20,6 +20,9 @@ export class ProblemSDK {
         this.problem = new Contract(problemConfig.address, IProblemAbi, signer) as Problem;
     }
 
+    /**
+     * @note For admin only
+     */
     async addTest(inputs: BigNumberish[], outputs: BigNumberish[], gasLimit: number) {
         const encodedInput = this.encodeData(inputs, this.problemConfig.inputFormat);
         const encodedOutput = ethers.utils.keccak256(this.encodeData(outputs, this.problemConfig.outputFormat));
@@ -30,21 +33,58 @@ export class ProblemSDK {
             gasLimit: gasLimit,
         });
     }
+    async replaceTests(tests: (TestCase & { output: string[] })[]) {
+        const encodedTests = tests.map((test) => ({
+            gasLimit: test.gasLimit,
+            input: this.encodeData(test.input, this.problemConfig.inputFormat),
+            output: ethers.utils.keccak256(this.encodeData(test.output, this.problemConfig.outputFormat)),
+        }));
+        return this.problem.replaceTests(encodedTests);
+    }
 
-    async deployAndRunExample(inputs: string[], bytecode: string): Promise<string[]> {
+    /**
+     * @note For admin only
+     */
+    async setDeadline(deadline: Date) {
+        return this.problem.setDeadline(Math.trunc(deadline.getTime() / 1000));
+    }
+
+    /**
+     * @note For participants to use this function to run example
+     */
+    async deployAndRunExample(inputs: string[], bytecode: string) {
         const userGate = await this.gateFactory.callStatic.gates(this.userAddr);
         const gate = new Contract(userGate, IGateAbi, this.signer) as Gate;
 
         const encodedInput = this.encodeData(inputs, this.problemConfig.inputFormat);
 
-        const encodedOutput = await gate.callStatic.deployAndRun(bytecode, encodedInput);
-        return this.decodeData(encodedOutput, this.problemConfig.outputFormat);
+        const { gasUsed, output: encodedOutput } = await gate.callStatic.deployAndRun(bytecode, encodedInput);
+        const output = this.decodeData(encodedOutput, this.problemConfig.outputFormat);
+        return {
+            output,
+            gasUsed: gasUsed.toNumber(),
+        };
     }
 
-    async submitSolution(bytecode: string) {
-        const userGate = await this.gateFactory.callStatic.gates(this.userAddr);
-        const gate = new Contract(userGate, IGateAbi, this.signer) as Gate;
-        return gate.deployAndSubmit(bytecode, this.problem.address);
+    async declareSolutionHash(hashedSolution: string) {
+        return this.problem.declareSolutionHash(hashedSolution);
+    }
+
+    async getContestantInfo() {
+        return this.problem.callStatic.getContestantInfo(this.userAddr);
+    }
+
+    async getDeadline(): Promise<Date> {
+        return this.problem.callStatic.deadline().then((x) => new Date(x.toNumber() * 1000));
+    }
+
+    /**
+     * Write function to submit solution (deploy a new contract)
+     */
+    async submitAndRunSolution(bytecode: string, isPreDeadlineSolution = false) {
+        return this.problem.submitAndRunSolution(this.userAddr, isPreDeadlineSolution, bytecode, {
+            gasLimit: 8_000_000,
+        });
     }
 
     async getTests(overrides: CallOverrides = {}): Promise<TestCase[]> {
@@ -69,7 +109,8 @@ export class ProblemSDK {
                 const raw: SubmissionResultRaw = this.problem.interface.parseLog(log)['args'] as any;
                 const result: Omit<SubmissionResult, 'tests'> = {
                     contestant: raw.contestant,
-                    version: raw.version.toNumber(),
+                    version: 0,
+                    isPreDeadlineSolution: raw.isPreDeadlineSolution,
                     point: raw.point.toNumber() / 100,
                     verdicts: raw.verdicts,
                 };

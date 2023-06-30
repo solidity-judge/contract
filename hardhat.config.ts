@@ -1,12 +1,12 @@
-import "@nomiclabs/hardhat-ethers";
-import "@nomiclabs/hardhat-etherscan";
-import "@nomiclabs/hardhat-waffle";
+import '@nomiclabs/hardhat-ethers';
+import '@nomiclabs/hardhat-etherscan';
+import '@nomiclabs/hardhat-waffle';
 import '@typechain/hardhat';
-import * as dotenv from "dotenv";
-import "hardhat-contract-sizer";
-import "hardhat-gas-reporter";
-import { HardhatUserConfig } from "hardhat/types";
-import "solidity-coverage";
+import * as dotenv from 'dotenv';
+import 'hardhat-contract-sizer';
+import 'hardhat-gas-reporter';
+import { HardhatUserConfig } from 'hardhat/types';
+import 'solidity-coverage';
 
 const DUMMY_PRIVATE_KEY = '0x1111111111111111111111111111111111111111111111111111111111111111';
 const DUMMY_RICK = '0xca3547a47684862274b476b689f951fad53219fbde79f66c9394e30f1f0b4904';
@@ -33,6 +33,7 @@ const config: HardhatUserConfig = {
             chainId: 43113,
             forking: {
                 url: `https://api.avax-test.network/ext/bc/C/rpc`,
+                blockNumber: 22494805,
             },
             // chainId: 1,
             // forking: {
@@ -78,8 +79,8 @@ const config: HardhatUserConfig = {
             accounts: [rootPrivateKey, RICK, DUCK],
             gasPrice: 30 * 1000000000,
             chainId: 43113,
-            gas: 8000000
-        }
+            gas: 8000000,
+        },
     },
     solidity: {
         compilers: [
@@ -93,7 +94,7 @@ const config: HardhatUserConfig = {
                 },
             },
         ],
-        overrides: {}
+        overrides: {},
     },
     mocha: {
         timeout: 500000,

@@ -7,9 +7,8 @@ import { exit } from 'process';
 const HG = 8000000;
 
 export async function verifyContract(contract: string, constructor: any[]) {
-
     // delay for 15000ms
-    await new Promise(resolve => setTimeout(resolve, 15000));
+    await new Promise((resolve) => setTimeout(resolve, 15000));
 
     try {
         await hre.run('verify:verify', {
