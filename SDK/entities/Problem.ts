@@ -100,8 +100,17 @@ export class ProblemSDK {
         return tests;
     }
 
+    async getTxReceipt(tx: string | TransactionReceipt): Promise<TransactionReceipt> {
+        while (true) {
+            const txReceipt = typeof tx === 'string' ? await this.signer.provider!.getTransactionReceipt(tx) : tx;
+            if (txReceipt) return txReceipt;
+            // sleep for 0.5 second
+            await new Promise((resolve) => setTimeout(resolve, 500));
+        }
+    }
     async parseSubmissionVerdict(tx: string | TransactionReceipt): Promise<SubmissionResult> {
-        const txReceipt = typeof tx === 'string' ? await this.signer.provider!.getTransactionReceipt(tx) : tx;
+        const txReceipt = await this.getTxReceipt(tx);
+
         const filter = this.problem.filters.RunSolution();
         let runSolutionEvents = txReceipt.logs
             .filter((log) => isSameAddress(log.topics[0], filter.topics![0] as string))
