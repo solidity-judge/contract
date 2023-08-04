@@ -89,7 +89,7 @@ export class ProblemSDK {
 
     async getTests(overrides: CallOverrides = {}): Promise<TestCase[]> {
         const testCount = (await this.problem.callStatic.testLength(overrides)).toNumber();
-        const tests = [];
+        const tests: TestCase[] = [];
         for (let i = 0; i < testCount; i++) {
             const test = await this.problem.callStatic.tests(i, overrides);
             tests.push({
