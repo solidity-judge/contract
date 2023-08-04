@@ -149,9 +149,12 @@ export class ProblemSDK {
     private encodeData(data: BigNumberish[], format: string[]): string {
         const splittedData = data.map((input, i) => {
             if (format[i].endsWith('[]')) {
-                return input.toString().split(',');
+                return input
+                    .toString()
+                    .split(',')
+                    .map((x) => x.trim());
             }
-            return input;
+            return input.toString().trim();
         });
         return ethers.utils.defaultAbiCoder.encode(format, splittedData);
     }
